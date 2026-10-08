@@ -53,9 +53,25 @@ def main():
             # 206 = partial, 200 = full (restart)
             status = getattr(r, "status", r.getcode())
             if status == 200 and got > 0:
-                # server ignored Range; restart
+                # server ignored Range; restart safely via truncation
+                print(f"  server returned 200 (no Range support); restarting from 0", flush=True)
                 got = 0
             content_range = r.headers.get("Content-Range", "")
+            if content_range and got > 0:
+                # Validate Content-Range start matches our local size
+                # Format: "bytes <start>-<end>/<total>"
+                try:
+                    range_start = int(content_range.split()[1].split("-")[0])
+                    if range_start != got:
+                        print(
+                            f"  Content-Range start {range_start} != local size {got}; "
+                            f"resetting to avoid corrupt append",
+                            flush=True,
+                        )
+                        got = 0
+                        status = 200  # treat as full restart
+                except (IndexError, ValueError):
+                    pass
             if content_range:
                 total = int(content_range.split("/")[-1])
             else:

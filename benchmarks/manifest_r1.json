@@ -1,0 +1,65 @@
+{
+  "round": "001_r1",
+  "created_utc": "2026-10-08T16:00:00Z",
+  "note": "R1 manifest. Dataset contents inside benchmark_verified.zip are NOT redistributed (upstream license: DO NOT redistribute unzipped files online).",
+  "upstream": {
+    "repo": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+    "commit": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "hf_dataset": "osunlp/ScienceAgentBench",
+    "hf_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+    "split": "verified",
+    "n_rows": 102
+  },
+  "parquet": {
+    "path": "benchmarks/data/verified-00000-of-00001.parquet",
+    "sha256": "c6f937863a220bd1762a00c20a0f79cc8dfca900b819bdb552150310731ae147",
+    "size_bytes": 129086
+  },
+  "benchmark_artifacts": {
+    "source_url": "https://buckeyemailosu-my.sharepoint.com/:u:/g/personal/chen_8336_osu_edu/IQB870QrmuqwS5Ck33cHpJfkAVt3LsMeariREIwP3AT7byA?e=3ckueC",
+    "filename": "benchmark_verified.zip",
+    "password": "scienceagentbench (published in upstream README)",
+    "expected_size_bytes": 1769478786,
+    "download_status": "IN_PROGRESS",
+    "local_path": "../sab-artifacts/benchmark_verified.zip",
+    "sha256_after_completion": null,
+    "extraction_target": "benchmarks/ScienceAgentBench/benchmark/"
+  },
+  "selected_tasks": [
+    {"instance_id": 85, "domain": "Bioinformatics", "output_type": "json", "row_index": null},
+    {"instance_id": 16, "domain": "Computational Chemistry", "output_type": "text", "row_index": null},
+    {"instance_id": 21, "domain": "Geographical Information Science", "output_type": "csv", "row_index": null}
+  ],
+  "program_hashes": {
+    "sab_verified_85__NO_STRATEGY__seed0": "58c7bc1f4ae66bfd",
+    "sab_verified_85__FIXED_STRATEGY__seed0": "b6e31cb05291e70c",
+    "sab_verified_16__NO_STRATEGY__seed0": "df1a03d317d1d7c4",
+    "sab_verified_16__FIXED_STRATEGY__seed0": "86acf1e1567ebe70",
+    "sab_verified_21__NO_STRATEGY__seed0": "f140501cf8e078ec",
+    "sab_verified_21__FIXED_STRATEGY__seed0": "0ed0ee5def739864"
+  },
+  "environment": {
+    "os": "Windows 10/11 (win32)",
+    "python_host": "3.10.1",
+    "python_wsl": "3.10.12",
+    "docker_host": "29.3.1 (Docker Desktop)",
+    "docker_wsl": "29.6.1 (Docker Engine)",
+    "wsl_distro": "Ubuntu-22.04",
+    "resource_module": "Available in WSL (not on native Windows)",
+    "evaluator_command": "python -m evaluation.harness.run_evaluation --split verified --cache_level base --max_workers 1"
+  },
+  "credentials": {
+    "openai_api_key_env_set": true,
+    "openai_key_is_genuine": false,
+    "note": "OPENAI_API_KEY env is a DashScope key. Upstream harness preflight only checks non-empty, not validity. For non-visual tasks (85/16/21), the key is never actually used for scoring. Genuine OpenAI/Azure key would be required only for GPT-4o visual judge tasks. Not disclosed in chat or Git.",
+    "deepseek_api_key_available": true,
+    "deepseek_used_for": "Round 001 code generation only (not evaluation)"
+  },
+  "exclude_from_git": [
+    "benchmark_verified.zip (1.77 GB binary)",
+    "benchmark/datasets/ (raw upstream data)",
+    "benchmark/gold_programs/ (answer keys)",
+    "benchmark/eval_programs/ (evaluation scripts with answer logic)",
+    "benchmark/scoring_rubrics/"
+  ]
+}

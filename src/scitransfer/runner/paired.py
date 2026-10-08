@@ -17,6 +17,7 @@ from ..benchmarks.scienceagentbench import (
     DEFAULT_BENCHMARK_DIR,
     DEFAULT_PARQUET,
     DEFAULT_UPSTREAM_DIR,
+    PINNED_SPLIT,
     EvaluatorUnavailable,
     OfficialEvalResult,
     TaskMeta,
@@ -177,7 +178,7 @@ def run_single_arm(
         }
     )
 
-    # ---- Official evaluation ----
+    # ---- Official evaluation (R1: pinned split, absolute paths, row-index parsing) ----
     eval_result: Optional[OfficialEvalResult] = None
     status = "SUCCESS"
     score: Optional[float] = None
@@ -194,23 +195,37 @@ def run_single_arm(
         try:
             eval_result = run_official_evaluation(
                 task=task,
-                pred_program_path=run_dir,  # harness expects folder containing pred_* files
+                pred_program_path=run_dir,
                 benchmark_dir=DEFAULT_BENCHMARK_DIR,
                 upstream_dir=DEFAULT_UPSTREAM_DIR,
                 output_dir=run_dir,
-                run_id=f"r001_{arm.value}_s{seed}",
+                run_id=f"r1_{arm.value}_s{seed}_i{task.instance_id}",
+                parquet_path=DEFAULT_PARQUET,
+                split=PINNED_SPLIT,
             )
             official = eval_result.official_evaluation
             eval_out_path = eval_result.raw_output_path
             if not official:
-                status = "BLOCKED" if eval_result.error and "Unavailable" in (eval_result.error or "") else "ERROR"
-                error = eval_result.error
-                exit_reason = "official_evaluator_unavailable_or_failed"
+                # Fail-closed: any invariant failure → BLOCKED or ERROR, score stays None.
+                err = eval_result.error or "Unknown evaluator failure"
+                if "Unavailable" in err or "not runnable" in err:
+                    status = "BLOCKED"
+                elif eval_result.is_placeholder:
+                    status = "BLOCKED"
+                else:
+                    status = "ERROR"
+                error = err
+                exit_reason = "official_eval_invariant_failed"
             else:
                 # success_rate is the official 0/1 task score.
                 score = float(eval_result.success_rate) if eval_result.success_rate is not None else None
-                status = "SUCCESS" if score == 1.0 else "FAILED"
-                exit_reason = "official_evaluated"
+                if score is None:
+                    status = "ERROR"
+                    error = "official_evaluation=True but score is None (internal error)"
+                    exit_reason = "official_eval_invariant_failed"
+                else:
+                    status = "SUCCESS" if score == 1.0 else "FAILED"
+                    exit_reason = "official_evaluated"
         except EvaluatorUnavailable as e:
             status = "BLOCKED"
             official = False

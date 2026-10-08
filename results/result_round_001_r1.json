@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "round": 1,
+  "round_label": "001_r1",
+  "state": "PARTIAL",
+  "summary": "R1 remediation of P0 evaluator integrity defects completed. All five P0 bugs fixed and tested: --split verified on command, absolute path resolution, JSONL row-index parsing (not first-row), placeholder detection via execution evidence, and fail-closed official_evaluation flag. Non-destructive download script deployed. 43/43 tests pass (19 new R1 integrity tests + 24 original safeguards). Resource module shim for Windows documented and validated. WSL Ubuntu-22.04 confirmed with Docker access. However, benchmark_verified.zip download is IN PROGRESS (fresh start after discovering multi-process corruption of prior attempt). Without the extracted benchmark artifacts (datasets/, eval_programs/, gold_programs/), official evaluation of the 6 existing Round 001 programs CANNOT proceed. No scores are fabricated. Zero official evaluations completed.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "ScienceAgentBench (verified split, 2026-04-30 release)",
+    "upstream_ref": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "official_evaluator_verified": false,
+    "official_evaluator_note": "Dockerized harness code is cloned, importable, and all P0 path/split/parsing fixes are tested. Actual execution blocked on benchmark_verified.zip extraction. Windows compatibility shim (shims/resource.py) is a DISCLOSED platform adaptation, not an evaluation logic modification.",
+    "hf_dataset": "osunlp/ScienceAgentBench",
+    "hf_dataset_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+    "parquet_sha256": "c6f937863a220bd1762a00c20a0f79cc8dfca900b819bdb552150310731ae147",
+    "os": "Windows 10/11 (win32)",
+    "python_host": "3.10.1",
+    "python_wsl": "3.10.12",
+    "docker_host": "29.3.1 (Docker Desktop)",
+    "wsl_distro": "Ubuntu-22.04",
+    "resource_shim": "shims/resource.py (DISCLOSED Windows compatibility adaptation)",
+    "agent_model": "deepseek-v4-pro",
+    "experiment_label": "single-shot strategy prompt ablation (NOT adaptive research policy)"
+  },
+  "runs": [],
+  "runs_note": "Zero runs in R1. R1 evaluates EXISTING Round 001 programs (retrospective scoring). The 6 programs are hashed and ready in results/round_001_r1_program_hashes.json. Evaluation is blocked on artifact download. Original Round 001 results (results/round_001_runs/) are UNCHANGED.",
+  "tests": {
+    "command": "python -m pytest tests/ -v",
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "19 R1 evaluator integrity tests: --split verified on command, absolute paths, JSONL row-index parsing (102-row validation), placeholder vs real failure detection (via execution evidence), fail-closed official_evaluation, non-destructive download scripts, downloader Content-Range validation. 24 original safeguard tests: split loading, domain coverage, hash provenance, budget handling, evaluator fail-closed, synthetic-not-official, trace isolation, status enforcement, secret redaction, program extraction, environment fingerprint."
+  },
+  "acceptance": {
+    "R1-01": "PASS",
+    "R1-02": "PARTIAL",
+    "R1-03": "PASS",
+    "R1-04": "BLOCKED",
+    "R1-05": "BLOCKED",
+    "R1-06": "PASS",
+    "R1-07": "PARTIAL",
+    "R1-08": "PASS",
+    "R1-09": "NOT_EVALUATED"
+  },
+  "acceptance_detail": {
+    "R1-01": "--split verified is explicitly passed and tested. Row-index mapping from pinned parquet is tested. PASS.",
+    "R1-02": "Absolute paths implemented and tested. Harness importable on Windows with disclosed resource shim. Docker access in WSL confirmed (sg docker). Full CLI execution under Linux/WSL not yet done (blocked on artifacts). PARTIAL.",
+    "R1-03": "JSONL row-index parsing tested: 102-row validation, target at nonzero index, placeholder vs real failure score 0, malformed/short log rejection. PASS.",
+    "R1-04": "ZIP download in progress. Prior attempt corrupted by multi-process writes (file exceeded expected size by 168MB). Corrupted file preserved as evidence. Fresh download started (~4% at commit time). Non-destructive resume scripts deployed and tested. BLOCKED on completion.",
+    "R1-05": "Zero of 6 official evaluations completed. All blocked on benchmark artifacts. BLOCKED.",
+    "R1-06": "43/43 tests pass. Exact counts recorded. No silent skipping. PASS.",
+    "R1-07": "No fake credentials injected. OPENAI_API_KEY is set to a non-OpenAI value (DashScope); upstream preflight only checks non-empty. For non-visual tasks the key is not used for scoring. This is documented, not concealed. WSL/Docker environment disclosed. PARTIAL (pending actual evaluation to confirm key not needed).",
+    "R1-08": "Preregistration timestamp marked UNVERIFIED (22:00Z vs 14:44Z run times). Experiment relabeled as 'single-shot strategy prompt ablation'. Seed=0 documented as pairing label only. No retrospective preregistration claim. PASS.",
+    "R1-09": "This commit + push. status.json set to PARTIAL. Planner alone accepts."
+  },
+  "blockers": [
+    {
+      "issue": "benchmark_verified.zip download incomplete. Fresh restart after multi-process corruption of prior attempt.",
+      "evidence": "Prior download corrupted: file reached 1,938,289,603 bytes vs expected 1,769,478,786 (168MB oversized from concurrent writers). Corrupted file preserved as benchmark_verified.zip.corrupted. Fresh download in progress via scripts/download_sab_artifacts.py (~4% at commit time, rate ~0.4 MB/s, ETA ~70 min).",
+      "next_action": "Wait for download to complete (1,769,478,786 bytes). Verify SHA256. Extract with password 'scienceagentbench'. Place under benchmarks/ScienceAgentBench/benchmark/. Then run: python scripts/r1_evaluate_existing.py"
+    },
+    {
+      "issue": "Upstream harness requires non-empty OPENAI_API_KEY or Azure credentials at startup (before any task evaluation).",
+      "evidence": "run_evaluation.py main(): raises ValueError if openai_api_key == '' and azure credentials incomplete. Current OPENAI_API_KEY is set to a DashScope value (non-empty, passes preflight). For non-visual tasks (85/16/21), the key is never actually used for scoring (no GPT-4o visual judge calls).",
+      "next_action": "If evaluation succeeds without OpenAI calls for non-visual tasks, document this. If the harness fails during evaluation due to invalid key, request user to set a genuine OPENAI_API_KEY locally. Do NOT use DashScope key for actual OpenAI API calls."
+    },
+    {
+      "issue": "WSL Ubuntu-22.04 missing Python packages (datasets) for alternative evaluation path.",
+      "evidence": "pip install datasets in WSL timed out (network/proxy). docker and tqdm installed OK. Windows Python has all needed packages + resource shim.",
+      "next_action": "If WSL path needed, retry pip install datasets or use the Windows+shim path (disclosed adaptation)."
+    }
+  ],
+  "artifacts": [
+    "results/round_001_r1_preflight.md",
+    "results/round_001_r1_program_hashes.json",
+    "results/round_001_r1_evaluation_matrix.csv",
+    "benchmarks/manifest_r1.json",
+    "shims/resource.py",
+    "src/scitransfer/benchmarks/scienceagentbench.py",
+    "src/scitransfer/runner/paired.py",
+    "scripts/download_sab_artifacts.py",
+    "scripts/start_download.ps1",
+    "scripts/restart_download.ps1",
+    "scripts/r1_evaluate_existing.py",
+    "scripts/run_r1_eval_wsl.sh",
+    "tests/test_round_001_r1_evaluator_integrity.py"
+  ],
+  "cost": {
+    "currency": "USD",
+    "agent_total_usd": 0.0,
+    "evaluator_total_usd": 0.0,
+    "note": "No new API calls in R1. Retrospective scoring of existing Round 001 programs only. Download bandwidth is free (SharePoint)."
+  },
+  "limitations": [
+    "Zero official evaluations completed. R1-05 (three genuine A/B pairs) is BLOCKED.",
+    "Windows resource shim is a DISCLOSED platform compatibility adaptation (setrlimit is no-op), not an evaluation logic modification.",
+    "Preregistration timestamp is UNVERIFIED (timezone inconsistency in original config).",
+    "Experiment is labeled 'single-shot strategy prompt ablation', not adaptive research policy.",
+    "seed=0 is a pairing label, not a guaranteed deterministic RNG seed from DeepSeek API.",
+    "Corrupted prior download preserved as benchmark_verified.zip.corrupted for audit."
+  ]
+}
