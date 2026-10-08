@@ -1,0 +1,56 @@
+```python
+import os
+import geopandas as gpd
+import pandas as pd
+from shapely.ops import unary_union
+
+roads_path = "benchmark/datasets/deforestation/roads.geojson"
+deforested_path = "benchmark/datasets/deforestation/deforestedArea.geojson"
+
+roads = gpd.read_file(roads_path)
+deforested = gpd.read_file(deforested_path)
+
+# Ensure both layers are in a consistent geographic CRS
+if roads.crs is None:
+    roads = roads.set_crs(epsg=4326)
+else:
+    roads = roads.to_crs(epsg=4326)
+
+if deforested.crs is None:
+    deforested = deforested.set_crs(epsg=4326)
+else:
+    deforested = deforested.to_crs(epsg=4326)
+
+# Project to UTM zone 20S, appropriate for Rondônia, to work in metres
+roads_proj = roads.to_crs(epsg=32720)
+deforested_proj = deforested.to_crs(epsg=32720)
+
+# Combine all road geometries and create a 5.5 km buffer
+road_geoms = [g for g in roads_proj.geometry if g is not None and not g.is_empty]
+road_union = unary_union(road_geoms) if road_geoms else None
+
+if road_union is None or road_union.is_empty:
+    percentage = 0.0
+else:
+    buffer_zone = road_union.buffer(5500)
+    buffer_area = buffer_zone.area
+
+    # Combine all deforestation polygons and intersect with the buffer
+    def_geoms = [g for g in deforested_proj.geometry if g is not None and not g.is_empty]
+    def_union = unary_union(def_geoms) if def_geoms else None
+
+    if def_union is None or def_union.is_empty:
+        deforested_in_buffer_area = 0.0
+    else:
+        deforested_in_buffer_area = def_union.intersection(buffer_zone).area
+
+    if buffer_area > 0:
+        percentage = (deforested_in_buffer_area / buffer_area) * 100.0
+    else:
+        percentage = 0.0
+
+os.makedirs("pred_results", exist_ok=True)
+pd.DataFrame({"percentage_deforestation": [percentage]}).to_csv(
+    "pred_results/deforestation_rate.csv", index=False
+)
+```

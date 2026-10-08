@@ -1,0 +1,103 @@
+{
+  "results_dir": "results\\round_001_runs",
+  "n_runs": 6,
+  "n_pairs": 3,
+  "n_pairs_with_official_eval_both_arms": 0,
+  "domains": {
+    "Computational Chemistry": {
+      "n_runs": 2,
+      "n_official": 0,
+      "scores": [
+        {
+          "task_id": "sab_verified_16",
+          "arm": "FIXED_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        },
+        {
+          "task_id": "sab_verified_16",
+          "arm": "NO_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        }
+      ],
+      "total_cost_usd": 0.017571
+    },
+    "Geographical Information Science": {
+      "n_runs": 2,
+      "n_official": 0,
+      "scores": [
+        {
+          "task_id": "sab_verified_21",
+          "arm": "FIXED_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        },
+        {
+          "task_id": "sab_verified_21",
+          "arm": "NO_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        }
+      ],
+      "total_cost_usd": 0.020381
+    },
+    "Bioinformatics": {
+      "n_runs": 2,
+      "n_official": 0,
+      "scores": [
+        {
+          "task_id": "sab_verified_85",
+          "arm": "FIXED_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        },
+        {
+          "task_id": "sab_verified_85",
+          "arm": "NO_STRATEGY",
+          "seed": 0,
+          "score": null,
+          "status": "BLOCKED"
+        }
+      ],
+      "total_cost_usd": 0.00926
+    }
+  },
+  "pairs": [
+    {
+      "task_id": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "seed": 0,
+      "score_a": null,
+      "score_b": null,
+      "diff": null,
+      "cost_a": 0.009326,
+      "cost_b": 0.008245
+    },
+    {
+      "task_id": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "seed": 0,
+      "score_a": null,
+      "score_b": null,
+      "diff": null,
+      "cost_a": 0.010176,
+      "cost_b": 0.010205
+    },
+    {
+      "task_id": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "seed": 0,
+      "score_a": null,
+      "score_b": null,
+      "diff": null,
+      "cost_a": 0.005883,
+      "cost_b": 0.003377
+    }
+  ]
+}

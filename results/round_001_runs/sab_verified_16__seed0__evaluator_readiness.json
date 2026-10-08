@@ -1,0 +1,13 @@
+{
+  "benchmark_dir": "benchmarks\\ScienceAgentBench\\benchmark",
+  "benchmark_dir_exists": false,
+  "upstream_dir": "benchmarks\\ScienceAgentBench-upstream",
+  "upstream_dir_exists": false,
+  "eval_programs": false,
+  "gold_programs": false,
+  "datasets": false,
+  "scoring_rubrics": false,
+  "docker_harness": false,
+  "run_eval_py": false,
+  "ready": false
+}

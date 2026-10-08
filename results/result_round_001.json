@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "round": 1,
+  "state": "PARTIAL",
+  "summary": "ScienceAgentBench verified split (102 tasks) downloaded and audited. Upstream repo cloned at c26e151. Three domains selected (Bioinformatics #85, Computational Chemistry #16, GIS #21) with one A/B paired run each. All six runs generated real DeepSeek programs with full traces, prompt hashes, strategy hashes and cost records. Official evaluation is BLOCKED for all six runs: benchmark_verified.zip (1.77 GB SharePoint download) is still in progress at ~26% and the required datasets/eval_programs/gold_programs are not yet extracted. Fail-closed behavior verified by 24 passing unit tests. No scores are fabricated. Infrastructure is ready to run official evaluation once artifacts arrive.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "ScienceAgentBench (verified split, 2026-04-30 release)",
+    "upstream_ref": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "official_evaluator_verified": false,
+    "official_evaluator_note": "Dockerized harness code is cloned and inspected; it cannot execute until benchmark_verified.zip is downloaded and extracted. Fail-closed is enforced in code and tested.",
+    "hf_dataset": "osunlp/ScienceAgentBench",
+    "hf_dataset_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+    "parquet_sha256": "c6f937863a220bd1762a00c20a0f79cc8dfca900b819bdb552150310731ae147",
+    "os": "Windows win32",
+    "python": "3.10.1",
+    "docker": "29.3.1",
+    "agent_model": "deepseek-v4-pro",
+    "agent_provider": "DeepSeek (https://api.deepseek.com/v1)",
+    "openai_key_available": false,
+    "openai_key_note": "OPENAI_API_KEY env is a DashScope key returning 401 on api.openai.com; not usable for GPT-4o visual judge. Selected tasks use non-visual outputs to avoid this dependency."
+  },
+  "runs": [
+    {
+      "task_id": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_85__NO_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.005883,
+      "error": "Evaluation skipped by configuration (--skip-evaluation smoke run); no official score claimed. Evaluator artifacts not yet available.",
+      "evaluator_output_path": null,
+      "strategy_id": null
+    },
+    {
+      "task_id": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_85__FIXED_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.003377,
+      "error": "Evaluation skipped by configuration (--skip-evaluation smoke run); no official score claimed. Evaluator artifacts not yet available.",
+      "evaluator_output_path": null,
+      "strategy_id": "baseline_first_validation_v1"
+    },
+    {
+      "task_id": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_16__NO_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.009326,
+      "error": "Official evaluator unavailable: missing eval_programs, gold_programs, datasets (inside benchmark_verified.zip, download incomplete).",
+      "evaluator_output_path": null,
+      "strategy_id": null
+    },
+    {
+      "task_id": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_16__FIXED_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.008245,
+      "error": "Official evaluator unavailable: missing eval_programs, gold_programs, datasets (inside benchmark_verified.zip, download incomplete).",
+      "evaluator_output_path": null,
+      "strategy_id": "baseline_first_validation_v1"
+    },
+    {
+      "task_id": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_21__NO_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.010176,
+      "error": "Official evaluator unavailable: missing eval_programs, gold_programs, datasets (inside benchmark_verified.zip, download incomplete).",
+      "evaluator_output_path": null,
+      "strategy_id": null
+    },
+    {
+      "task_id": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "official_evaluation": false,
+      "status": "BLOCKED",
+      "score": null,
+      "trace_path": "results/round_001_runs/sab_verified_21__FIXED_STRATEGY__seed0/trace.jsonl",
+      "cost_usd": 0.010205,
+      "error": "Official evaluator unavailable: missing eval_programs, gold_programs, datasets (inside benchmark_verified.zip, download incomplete).",
+      "evaluator_output_path": null,
+      "strategy_id": "baseline_first_validation_v1"
+    }
+  ],
+  "tests": {
+    "command": "python -m pytest tests/test_round_001_safeguards.py -v",
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "24/24 passed. Covers: verified split loading (102 tasks, 4 domains), task isolation, no answer-key fields, prompt/strategy hash determinism and provenance, placebo arm, budget handling, missing-evaluator fail-closed (raises EvaluatorUnavailable), synthetic-score-never-official, trace JSONL append and overwrite-protection, run-folder isolation, explicit BLOCKED/ERROR statuses, official score parsing, secret redaction, code extraction, environment fingerprint stability."
+  },
+  "acceptance": {
+    "AC-01": "PASS",
+    "AC-02": "BLOCKED",
+    "AC-03": "BLOCKED",
+    "AC-04": "PASS",
+    "AC-05": "PASS",
+    "AC-06": "NOT_EVALUATED"
+  },
+  "blockers": [
+    {
+      "issue": "benchmark_verified.zip (1.77 GB) download from SharePoint is slow (~0.1 MB/s) and incomplete (~26% at commit time). Required datasets/, eval_programs/, gold_programs/ cannot be extracted until download completes.",
+      "evidence": "Download log at sab-artifacts/download.log; zip size 466,893,789 / 1,769,478,786 bytes. Evaluator readiness report in every run's pair_result.json shows benchmark_dir_exists=false.",
+      "next_action": "Resume/complete the download (scripts/download_sab_artifacts.py with retry), unzip with password 'scienceagentbench', place under benchmarks/ScienceAgentBench/benchmark/, then re-run: python -m scitransfer.cli run-pair --task-id {85,16,21} --seed 0 (without --skip-evaluation) to obtain genuine official scores."
+    },
+    {
+      "issue": "No valid OpenAI API key. OPENAI_API_KEY environment variable is a DashScope key (401 on api.openai.com). GPT-4o visual judge is unavailable.",
+      "evidence": "HTTP 401 Unauthorized from https://api.openai.com/v1/models with OPENAI_API_KEY.",
+      "next_action": "Either provide a real OpenAI key (needed only for visualization-output tasks), or continue selecting non-visual tasks as done in this round. Selected tasks (85, 16, 21) output JSON/text/CSV and do not require the visual judge."
+    },
+    {
+      "issue": "DashScope API endpoint unreachable from this network (SSL/proxy error). DeepSeek is the only working LLM provider.",
+      "evidence": "URLError: [Errno 2] No such file or directory (SSL) when calling https://dashscope.aliyuncs.com/compatible-mode/v1/models.",
+      "next_action": "DeepSeek is used and documented as the pinned model. No action required unless DashScope is specifically needed."
+    }
+  ],
+  "artifacts": [
+    "benchmarks/manifest.json",
+    "benchmarks/manifest_audit.json",
+    "benchmarks/data/verified-00000-of-00001.parquet",
+    "experiments/round_001_config.json",
+    "results/round_001_environment_audit.md",
+    "results/round_001_summary.json",
+    "results/round_001_runs/sab_verified_85__NO_STRATEGY__seed0/",
+    "results/round_001_runs/sab_verified_85__FIXED_STRATEGY__seed0/",
+    "results/round_001_runs/sab_verified_16__NO_STRATEGY__seed0/",
+    "results/round_001_runs/sab_verified_16__FIXED_STRATEGY__seed0/",
+    "results/round_001_runs/sab_verified_21__NO_STRATEGY__seed0/",
+    "results/round_001_runs/sab_verified_21__FIXED_STRATEGY__seed0/",
+    "src/scitransfer/",
+    "tests/test_round_001_safeguards.py",
+    "pyproject.toml"
+  ],
+  "cost": {
+    "currency": "USD",
+    "agent_total_usd": 0.047211,
+    "evaluator_total_usd": 0.0,
+    "per_run": {
+      "sab_verified_85_NO_STRATEGY": 0.005883,
+      "sab_verified_85_FIXED_STRATEGY": 0.003377,
+      "sab_verified_16_NO_STRATEGY": 0.009326,
+      "sab_verified_16_FIXED_STRATEGY": 0.008245,
+      "sab_verified_21_NO_STRATEGY": 0.010176,
+      "sab_verified_21_FIXED_STRATEGY": 0.010205
+    },
+    "tokens_total": {"input": 5000, "output": 29807},
+    "pricing_basis": "DeepSeek published per-1M-token prices: input $0.50, output $1.50 (deepseek-v4-pro). Estimates, not invoice."
+  },
+  "limitations": [
+    "One paired seed per domain (seed 0). Not statistically powered; no significance claims.",
+    "Agent is direct prompting without self-debug loop, to keep Round 001 resource-bounded.",
+    "Strategy B (baseline_first_validation_v1) is a single preregistered generic tactic; fixed before any target-task outcome was observed.",
+    "Task 85 pair used --skip-evaluation during smoke testing; its BLOCKED error message differs slightly from tasks 16/21 but both correctly claim zero official evaluations.",
+    "benchmark_verified.zip SHA256 and per-dataset checksums will be recorded after the download completes.",
+    "DeepSeek model identity is recorded in traces; this is not one of the original SAB-supported engines (OpenAI/Bedrock). Model pinning is documented in experiments/round_001_config.json."
+  ]
+}

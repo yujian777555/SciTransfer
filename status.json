@@ -5,15 +5,16 @@
   "branch": "main",
   "phase": "PHASE0",
   "current_round": 1,
-  "state": "AWAITING_EXECUTOR",
+  "state": "PARTIAL",
   "planner": "ChatGPT",
-  "executor": "Kimi",
+  "executor": "MiMo",
   "latest_plan": "planner/latest_plan.md",
   "plan_archive": "planner/plan_001.md",
-  "latest_result": null,
+  "latest_result": "results/result_round_001.json",
   "last_review": null,
   "acceptance": "PENDING",
   "base_commit_at_planning": "37dcc8623ccdc3291cac1c08c76a365b7cc55be0",
   "project_goal": "Measure whether scientific decision strategies transfer between scientific domains using outcome-grounded paired executions; identify and avoid negative transfer.",
-  "notes": "Repo initially contained README.md only. No implementation or real benchmark result accepted or claimed."
+  "notes": "Round 001 executed as PARTIAL: verified ScienceAgentBench split downloaded and audited; 3-domain A/B pairs generated with real DeepSeek runs (6 runs, full traces, costs); 24/24 safeguard tests pass. Official evaluation BLOCKED — benchmark_verified.zip (1.77GB SharePoint) download incomplete (~26%). Fail-closed enforced and tested. No fabricated scores. Implementation commit SHA reported in handoff message (circularity: status.json is inside the commit being reported).",
+  "implementation_commit": null
 }

@@ -1,0 +1,91 @@
+{
+  "benchmark_name": "ScienceAgentBench",
+  "benchmark_version": "verified split (2026-04-30 release)",
+  "source": {
+    "github_repo": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+    "github_commit": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "github_commit_date": "2026-07-17",
+    "hf_dataset": "https://huggingface.co/datasets/osunlp/ScienceAgentBench",
+    "hf_dataset_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+    "hf_dataset_last_modified": "2026-05-01",
+    "paper": "https://arxiv.org/abs/2410.05080",
+    "artifacts_url": "https://buckeyemailosu-my.sharepoint.com/:u:/g/personal/chen_8336_osu_edu/IQB870QrmuqwS5Ck33cHpJfkAVt3LsMeariREIwP3AT7byA?e=3ckueC",
+    "artifacts_file": "benchmark_verified.zip",
+    "artifacts_size_bytes": 1769478786,
+    "artifacts_password": "scienceagentbench (published in upstream README; not a secret)"
+  },
+  "license": {
+    "benchmark_tasks": "CC-BY-4.0 (most tasks); retained original licenses for rasterio/rasterio (instance IDs 32,46,53,54,84) and hackingmaterials/matminer (instance ID 3)",
+    "code": "MIT"
+  },
+  "verified_parquet": {
+    "path": "benchmarks/data/verified-00000-of-00001.parquet",
+    "sha256": "c6f937863a220bd1762a00c20a0f79cc8dfca900b819bdb552150310731ae147",
+    "size_bytes": 129086,
+    "n_tasks": 102,
+    "domain_counts": {
+      "Bioinformatics": 27,
+      "Computational Chemistry": 20,
+      "Geographical Information Science": 27,
+      "Psychology and Cognitive science": 28
+    }
+  },
+  "selected_tasks_round_001": [
+    {
+      "instance_id": 85,
+      "task_key": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "github_name": "mad-lab-fau/BioPsyKit",
+      "gold_program_name": "saliva.py",
+      "eval_script_name": "biopsykit_saliva_eval.py",
+      "output_fname": "pred_results/saliva_pred.json",
+      "subtask_categories": "Feature Engineering",
+      "output_type": "json",
+      "selection_rationale": "Non-visual JSON output; avoids GPT-4o visual judge dependency."
+    },
+    {
+      "instance_id": 16,
+      "task_key": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "github_name": "felixjwong/antibioticsai",
+      "gold_program_name": "compound_filter.py",
+      "eval_script_name": "antibioticsai_filter_eval.py",
+      "output_fname": "pred_results/compound_filter_results.txt",
+      "subtask_categories": "Computational Analysis",
+      "output_type": "text",
+      "selection_rationale": "Non-visual text output; avoids visual judge; Computational Analysis only."
+    },
+    {
+      "instance_id": 21,
+      "task_key": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "github_name": "geopandas/geopandas",
+      "gold_program_name": "deforestation.py",
+      "eval_script_name": "eval_deforestation.py",
+      "output_fname": "pred_results/deforestation_rate.csv",
+      "subtask_categories": "Geospatial Analysis",
+      "output_type": "csv",
+      "selection_rationale": "Non-visual CSV output; avoids visual judge; Geospatial Analysis only."
+    }
+  ],
+  "evaluator": {
+    "primary": "Dockerized harness (evaluation/harness/run_evaluation.py), recommended by upstream",
+    "fallback": "Direct evaluation (run_eval.py) with conda env sci-agent-eval",
+    "visual_judge": "GPT-4o (gpt4_visual_judge.py) for plot-comparison tasks; selected tasks avoid this dependency",
+    "official_score_fields": ["valid_program", "codebert_score", "success_rate", "log_info"],
+    "success_rate_semantics": "0 or 1 (task-level success)",
+    "requires_openai_key": true,
+    "openai_key_available": false,
+    "openai_key_note": "OPENAI_API_KEY in environment is a DashScope key and returns 401 against api.openai.com. DeepSeek API key is available and used for agent generation. Visual-judge evaluation would be blocked; selected tasks avoid visual judging."
+  },
+  "datasets_checksums": {
+    "note": "Per-dataset checksums are inside benchmark_verified.zip which is password-protected. Zip SHA256 recorded after download. Full dataset tree not redistributed per upstream license terms."
+  },
+  "exclude_from_git": [
+    "benchmark_verified.zip (large binary; do not redistribute unzipped contents)",
+    "benchmark/datasets/ raw data",
+    "benchmark/gold_programs/ answer keys",
+    "benchmark/eval_programs/ evaluation scripts with answer logic",
+    "benchmark/scoring_rubrics/"
+  ]
+}

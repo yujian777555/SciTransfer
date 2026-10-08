@@ -1,0 +1,72 @@
+{
+  "round": 1,
+  "experiment_name": "real_benchmark_integration_minimal_pilot",
+  "preregistered_at": "2026-10-08T22:00:00Z",
+  "benchmark": {
+    "name": "ScienceAgentBench",
+    "split": "verified",
+    "hf_dataset": "osunlp/ScienceAgentBench",
+    "hf_dataset_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+    "parquet_path": "benchmarks/data/verified-00000-of-00001.parquet",
+    "parquet_sha256": "c6f937863a220bd1762a00c20a0f79cc8dfca900b819bdb552150310731ae147",
+    "upstream_repo": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+    "upstream_commit": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "artifacts_url": "https://buckeyemailosu-my.sharepoint.com/:u:/g/personal/chen_8336_osu_edu/IQB870QrmuqwS5Ck33cHpJfkAVt3LsMeariREIwP3AT7byA?e=3ckueC",
+    "artifacts_password": "scienceagentbench",
+    "artifacts_file": "benchmark_verified.zip"
+  },
+  "agent": {
+    "harness_id": "scitransfer-direct-prompt",
+    "model": "deepseek-v4-pro",
+    "provider": "DeepSeek (OpenAI-compatible API at https://api.deepseek.com/v1)",
+    "temperature": 0.0,
+    "max_tokens_per_call": 8192,
+    "note": "Pinned model; official SAB run_infer.py supports OpenAI/Bedrock only. DeepSeek is used via OpenAI-compatible chat completions. Model identity is recorded in every trace."
+  },
+  "arms": {
+    "A": {
+      "arm": "NO_STRATEGY",
+      "description": "Task instruction + dataset info only. No strategy block."
+    },
+    "B": {
+      "arm": "FIXED_STRATEGY",
+      "description": "Same as A plus a preregistered generic research strategy block.",
+      "strategy_id": "baseline_first_validation_v1",
+      "strategy_preregistered": true,
+      "strategy_fixed_before_outcomes": true
+    }
+  },
+  "fixed_strategy": {
+    "strategy_id": "baseline_first_validation_v1",
+    "preconditions": "The task asks for a data-driven scientific analysis with a specific output file.",
+    "research_action": "Before writing the full analysis, first write a minimal baseline that only loads the data and saves a trivial but correctly formatted output at the required path. Then iterate: add one analysis step at a time and re-run to verify each step produces a valid intermediate result before adding the next. Prefer the cheapest discriminating check over a complex pipeline.",
+    "expected_evidence": "The program must save the output file at the exact requested path, and each iteration must be re-executed to confirm no runtime error before proceeding.",
+    "invalidity_conditions": "If the dataset path is inaccessible or the required output format is ambiguous after inspecting previews, stop and report the blocker rather than inventing data.",
+    "source_provenance": "Preregistered generic research tactic (baseline-before-escalation); no target-task outcome observed; no hidden evaluation key used.",
+    "cost_constraints": "Stay within the run budget; do not add unnecessary dependencies."
+  },
+  "budget_per_run": {
+    "max_tokens": 32000,
+    "max_cost_usd": 1.0,
+    "timeout_s": 900
+  },
+  "selected_tasks": [
+    {
+      "instance_id": 85,
+      "domain": "Bioinformatics",
+      "selection_rationale": "Non-visual JSON output (saliva_pred.json); Feature Engineering; avoids GPT-4o visual judge dependency. BioPsyKit saliva feature extraction."
+    },
+    {
+      "instance_id": 16,
+      "domain": "Computational Chemistry",
+      "selection_rationale": "Non-visual text output (compound_filter_results.txt); Computational Analysis only; avoids visual judge. antibioticsai compound filter."
+    },
+    {
+      "instance_id": 21,
+      "domain": "Geographical Information Science",
+      "selection_rationale": "Non-visual CSV output (deforestation_rate.csv); Geospatial Analysis only; avoids visual judge. geopandas deforestation rate."
+    }
+  ],
+  "seeds": [0],
+  "notes": "One paired seed per domain is the minimum pilot. Not statistically powered. No multi-seed sweep is run this round. Strategy B is fixed before any target-task outcome is observed."
+}

@@ -1,0 +1,36 @@
+[RESEARCH STRATEGY — baseline_first_validation_v1]
+Preconditions: The task asks for a data-driven scientific analysis with a specific output file.
+Recommended research action: Before writing the full analysis, first write a minimal baseline that only loads the data and saves a trivial but correctly formatted output at the required path. Then iterate: add one analysis step at a time and re-run to verify each step produces a valid intermediate result before adding the next. Prefer the cheapest discriminating check over a complex pipeline.
+Expected evidence before claiming success: The program must save the output file at the exact requested path, and each iteration must be re-executed to confirm no runtime error before proceeding.
+Invalid when: If the dataset path is inaccessible or the required output format is ambiguous after inspecting previews, stop and report the blocker rather than inventing data.
+Cost constraint: Stay within the run budget; do not add unnecessary dependencies.
+Provenance: Preregistered generic research tactic (baseline-before-escalation); no target-task outcome observed; no hidden evaluation key used.
+[END STRATEGY]
+
+You are an expert Python programming assistant that helps scientist users to write high-quality code to solve their tasks.
+Given a user request, you are expected to write a complete program that accomplishes the requested task and save any outputs in the correct format.
+Please wrap your program in a code block that specifies the script type, python. For example:
+```python
+print("Hello World!")
+```
+
+Please keep your response concise and do not use a code block if it's not intended to be executed.
+Please do not suggest a few line changes, incomplete program outline, or partial code that requires the user to modify.
+Please do not use any interactive Python commands in your program, such as `!pip install numpy`, which will cause execution errors.
+
+Here's the user request you need to work on:
+Analyze the given saliva data and compute features that represent sample statistics or distribution (e.g., mean, location of max/min value, skewness) for each subject. Save the computed features along with subject condition as a dictionary of dictionaries into a json file "pred_results/saliva_pred.json".
+You can access the dataset at `benchmark/datasets`. Here is the directory structure of the dataset:
+```
+|-- saliva_data/
+|---- data.pkl
+```
+Here are some helpful previews for the dataset file(s):
+[START Preview of saliva_data/data.pkl, which is a pandas DataFrame, and (condition, subject, sample) is the index]
+condition,subject,sample,cortisol
+Intervention,Vp01,0,6.988899999999999
+Intervention,Vp01,1,7.0332
+Intervention,Vp01,2,5.7767
+Intervention,Vp01,3,5.2579
+Intervention,Vp01,4,5.00795
+[END Preview of saliva_data/data.pkl]

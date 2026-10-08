@@ -1,0 +1,29 @@
+{
+  "task_id": "sab_verified_85",
+  "domain": "Bioinformatics",
+  "arm": "NO_STRATEGY",
+  "seed": 0,
+  "agent_id": "scitransfer-direct-prompt",
+  "agent_model": "deepseek-v4-pro",
+  "status": "BLOCKED",
+  "score": null,
+  "official_evaluation": false,
+  "cost_usd": 0.005883,
+  "tokens_in": 540,
+  "tokens_out": 3742,
+  "prompt_hash": "e8e40a27bf959496d0665901cc15fed52b3277932162446c4a9d3fc5b6698a6e",
+  "strategy_id": null,
+  "strategy_hash": null,
+  "environment_sha": "506ce0d76c3d1b15",
+  "trace_path": "results\\round_001_runs\\sab_verified_85__NO_STRATEGY__seed0\\trace.jsonl",
+  "evaluator_output_path": null,
+  "error": "Evaluation skipped by configuration; no official score claimed.",
+  "exit_reason": "evaluation_skipped_by_config",
+  "started_at": "2026-10-08T14:43:22.627073+00:00",
+  "finished_at": "2026-10-08T14:44:13.863986+00:00",
+  "extra": {
+    "instance_id": 85,
+    "pred_program": "results\\round_001_runs\\sab_verified_85__NO_STRATEGY__seed0\\pred_saliva.py",
+    "prompt_path": "results\\round_001_runs\\sab_verified_85__NO_STRATEGY__seed0\\prompt.txt"
+  }
+}

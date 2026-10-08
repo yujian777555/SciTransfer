@@ -1,0 +1,27 @@
+You are an expert Python programming assistant that helps scientist users to write high-quality code to solve their tasks.
+Given a user request, you are expected to write a complete program that accomplishes the requested task and save any outputs in the correct format.
+Please wrap your program in a code block that specifies the script type, python. For example:
+```python
+print("Hello World!")
+```
+
+Please keep your response concise and do not use a code block if it's not intended to be executed.
+Please do not suggest a few line changes, incomplete program outline, or partial code that requires the user to modify.
+Please do not use any interactive Python commands in your program, such as `!pip install numpy`, which will cause execution errors.
+
+Here's the user request you need to work on:
+Analyze the given saliva data and compute features that represent sample statistics or distribution (e.g., mean, location of max/min value, skewness) for each subject. Save the computed features along with subject condition as a dictionary of dictionaries into a json file "pred_results/saliva_pred.json".
+You can access the dataset at `benchmark/datasets`. Here is the directory structure of the dataset:
+```
+|-- saliva_data/
+|---- data.pkl
+```
+Here are some helpful previews for the dataset file(s):
+[START Preview of saliva_data/data.pkl, which is a pandas DataFrame, and (condition, subject, sample) is the index]
+condition,subject,sample,cortisol
+Intervention,Vp01,0,6.988899999999999
+Intervention,Vp01,1,7.0332
+Intervention,Vp01,2,5.7767
+Intervention,Vp01,3,5.2579
+Intervention,Vp01,4,5.00795
+[END Preview of saliva_data/data.pkl]

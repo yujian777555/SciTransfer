@@ -1,0 +1,28 @@
+{
+  "benchmark": "ScienceAgentBench (verified split)",
+  "upstream_repo": "https://github.com/OSU-NLP-Group/ScienceAgentBench",
+  "upstream_head": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+  "hf_dataset": "osunlp/ScienceAgentBench",
+  "hf_dataset_sha": "9c6e96c9e74572e979b0930ee735041cef528cb7",
+  "n_tasks": 102,
+  "domain_counts": {
+    "Computational Chemistry": 20,
+    "Geographical Information Science": 27,
+    "Bioinformatics": 27,
+    "Psychology and Cognitive science": 28
+  },
+  "evaluator_readiness": {
+    "benchmark_dir": "benchmarks\\ScienceAgentBench\\benchmark",
+    "benchmark_dir_exists": false,
+    "upstream_dir": "benchmarks\\ScienceAgentBench-upstream",
+    "upstream_dir_exists": false,
+    "eval_programs": false,
+    "gold_programs": false,
+    "datasets": false,
+    "scoring_rubrics": false,
+    "docker_harness": false,
+    "run_eval_py": false,
+    "ready": false
+  },
+  "parquet_path": "benchmarks\\data\\verified-00000-of-00001.parquet"
+}

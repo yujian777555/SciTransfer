@@ -1,0 +1,42 @@
+[RESEARCH STRATEGY — baseline_first_validation_v1]
+Preconditions: The task asks for a data-driven scientific analysis with a specific output file.
+Recommended research action: Before writing the full analysis, first write a minimal baseline that only loads the data and saves a trivial but correctly formatted output at the required path. Then iterate: add one analysis step at a time and re-run to verify each step produces a valid intermediate result before adding the next. Prefer the cheapest discriminating check over a complex pipeline.
+Expected evidence before claiming success: The program must save the output file at the exact requested path, and each iteration must be re-executed to confirm no runtime error before proceeding.
+Invalid when: If the dataset path is inaccessible or the required output format is ambiguous after inspecting previews, stop and report the blocker rather than inventing data.
+Cost constraint: Stay within the run budget; do not add unnecessary dependencies.
+Provenance: Preregistered generic research tactic (baseline-before-escalation); no target-task outcome observed; no hidden evaluation key used.
+[END STRATEGY]
+
+You are an expert Python programming assistant that helps scientist users to write high-quality code to solve their tasks.
+Given a user request, you are expected to write a complete program that accomplishes the requested task and save any outputs in the correct format.
+Please wrap your program in a code block that specifies the script type, python. For example:
+```python
+print("Hello World!")
+```
+
+Please keep your response concise and do not use a code block if it's not intended to be executed.
+Please do not suggest a few line changes, incomplete program outline, or partial code that requires the user to modify.
+Please do not use any interactive Python commands in your program, such as `!pip install numpy`, which will cause execution errors.
+
+Here's the user request you need to work on:
+Calculate the deforestation area percentage in the Brazilian state of Rondônia within the buffer zone of 5.5km around road layers. Save the percentage result in a CSV file named "pred_results/deforestation_rate.csv" with a column title percentage_deforestation.
+You can access the dataset at `benchmark/datasets`. Here is the directory structure of the dataset:
+```
+|-- deforestation/
+|---- roads.geojson
+|---- deforestedArea.geojson
+```
+Here are some helpful previews for the dataset file(s):
+[START Preview of deforestation/roads.geojson]
+        OBJECTID        Name        Status        Shape_Length        geometry
+0        1                Unofficial        0.026663        LINESTRING (-66.04178 -9.40204, -66.04178 -9.4...)ÃŸ
+1        2                Unofficial        14.269591        LINESTRING (-66.04189 -9.40211, -66.04189 -9.4...)
+2        3                Unofficial        0.016867        LINESTRING (-65.98509 -9.41274, -65.98509 -9.4...)
+3        4                Unofficial        6369.384754        LINESTRING (-65.98226 -9.46910, -65.98302 -9.4...)
+4        5                Unofficial        4379.577556        LINESTRING (-66.10909 -9.44761, -66.10433 -9.4...)
+...
+[END Preview of deforestation/roads.geojson]
+[START Preview of deforestation/deforestedArea.geojson]
+OBJECTID        Shape_Length        Shape_Area        geometry
+0        1        1.915963e+08        7.831200e+10        MULTIPOLYGON (((-60.78652 -13.64909, -60.78706...)))
+[END Preview of deforestation/deforestedArea.geojson]

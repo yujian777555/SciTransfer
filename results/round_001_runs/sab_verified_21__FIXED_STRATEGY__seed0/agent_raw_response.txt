@@ -1,0 +1,59 @@
+```python
+import os
+from shapely.ops import unary_union
+import geopandas as gpd
+
+ROADS_PATH = "benchmark/datasets/deforestation/roads.geojson"
+DEFORESTED_PATH = "benchmark/datasets/deforestation/deforestedArea.geojson"
+OUTPUT_DIR = "pred_results"
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, "deforestation_rate.csv")
+
+BUFFER_METERS = 5500
+
+# Ensure required files exist before processing
+if not os.path.exists(ROADS_PATH):
+    raise FileNotFoundError(f"Missing roads dataset: {ROADS_PATH}")
+if not os.path.exists(DEFORESTED_PATH):
+    raise FileNotFoundError(f"Missing deforestation dataset: {DEFORESTED_PATH}")
+
+# Load vector data
+roads = gpd.read_file(ROADS_PATH)
+deforested = gpd.read_file(DEFORESTED_PATH)
+
+# Ensure consistent geographic CRS
+if roads.crs is None:
+    roads = roads.set_crs(epsg=4326)
+else:
+    roads = roads.to_crs(epsg=4326)
+
+if deforested.crs is None:
+    deforested = deforested.set_crs(epsg=4326)
+else:
+    deforested = deforested.to_crs(epsg=4326)
+
+# Project to UTM zone 20S, which covers the Brazilian state of Rondônia
+roads_proj = roads.to_crs(epsg=32720)
+deforested_proj = deforested.to_crs(epsg=32720)
+
+# Dissolve roads and create a 5.5 km buffer around the road network
+road_geometries = [g for g in roads_proj.geometry if g is not None and not g.is_empty]
+if not road_geometries:
+    raise ValueError("No valid road geometries found")
+
+roads_union = unary_union(road_geometries)
+road_buffer = roads_union.buffer(BUFFER_METERS)
+
+# Deforestation area inside the buffer
+deforested_clipped = deforested_proj.geometry.intersection(road_buffer)
+deforested_area_in_buffer = deforested_clipped.area.sum()
+
+# Percentage of the buffer zone that is deforested
+buffer_area = road_buffer.area
+percentage_deforestation = (deforested_area_in_buffer / buffer_area) * 100
+
+# Save result
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+    f.write("percentage_deforestation\n")
+    f.write(f"{percentage_deforestation}\n")
+```

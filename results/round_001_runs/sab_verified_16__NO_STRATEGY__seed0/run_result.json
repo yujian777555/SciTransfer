@@ -1,0 +1,29 @@
+{
+  "task_id": "sab_verified_16",
+  "domain": "Computational Chemistry",
+  "arm": "NO_STRATEGY",
+  "seed": 0,
+  "agent_id": "scitransfer-direct-prompt",
+  "agent_model": "deepseek-v4-pro",
+  "status": "BLOCKED",
+  "score": null,
+  "official_evaluation": false,
+  "cost_usd": 0.009326,
+  "tokens_in": 883,
+  "tokens_out": 5923,
+  "prompt_hash": "eba98f4e28ff306d90723c7be26d1a22eea4e4ce3df94644e2d4ce33a71e65aa",
+  "strategy_id": null,
+  "strategy_hash": null,
+  "environment_sha": "506ce0d76c3d1b15",
+  "trace_path": "results\\round_001_runs\\sab_verified_16__NO_STRATEGY__seed0\\trace.jsonl",
+  "evaluator_output_path": null,
+  "error": "Official ScienceAgentBench evaluator is not runnable. Missing: ['eval_programs', 'gold_programs', 'datasets', 'docker_harness']. Full report: {\"benchmark_dir\": \"benchmarks\\\\ScienceAgentBench\\\\benchmark\", \"benchmark_dir_exists\": false, \"datasets\": false, \"docker_harness\": false, \"eval_programs\": false, \"gold_programs\": false, \"ready\": false, \"run_eval_py\": false, \"scoring_rubrics\": false, \"upstream_dir\": \"benchmarks\\\\ScienceAgentBench-upstream\", \"upstream_dir_exists\": false}. Download benchmark_verified.zip (password=***REDACTED*** from the official SharePoint link in the upstream README and unzip under benchmarks\\ScienceAgentBench\\benchmark; clone OSU-NLP-Group/ScienceAgentBench at benchmarks\\ScienceAgentBench-upstream.",
+  "exit_reason": "official_evaluator_unavailable",
+  "started_at": "2026-10-08T14:45:01.248783+00:00",
+  "finished_at": "2026-10-08T14:46:27.144056+00:00",
+  "extra": {
+    "instance_id": 16,
+    "pred_program": "results\\round_001_runs\\sab_verified_16__NO_STRATEGY__seed0\\pred_compound_filter.py",
+    "prompt_path": "results\\round_001_runs\\sab_verified_16__NO_STRATEGY__seed0\\prompt.txt"
+  }
+}

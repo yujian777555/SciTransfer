@@ -1,0 +1,29 @@
+{
+  "task_id": "sab_verified_21",
+  "domain": "Geographical Information Science",
+  "arm": "FIXED_STRATEGY",
+  "seed": 0,
+  "agent_id": "scitransfer-direct-prompt",
+  "agent_model": "deepseek-v4-pro",
+  "status": "BLOCKED",
+  "score": null,
+  "official_evaluation": false,
+  "cost_usd": 0.010205,
+  "tokens_in": 966,
+  "tokens_out": 6481,
+  "prompt_hash": "ebc94dd2e57a4cb108e2933cf90767f985b4aa71a324f6b7f9f9638c37eb94ff",
+  "strategy_id": "baseline_first_validation_v1",
+  "strategy_hash": "ed2cb52cf9f14e2d5dd3bfdaf7e6054a8138261992029aaa07337b6bf96bed1f",
+  "environment_sha": "506ce0d76c3d1b15",
+  "trace_path": "results\\round_001_runs\\sab_verified_21__FIXED_STRATEGY__seed0\\trace.jsonl",
+  "evaluator_output_path": null,
+  "error": "Official ScienceAgentBench evaluator is not runnable. Missing: ['eval_programs', 'gold_programs', 'datasets', 'docker_harness']. Full report: {\"benchmark_dir\": \"benchmarks\\\\ScienceAgentBench\\\\benchmark\", \"benchmark_dir_exists\": false, \"datasets\": false, \"docker_harness\": false, \"eval_programs\": false, \"gold_programs\": false, \"ready\": false, \"run_eval_py\": false, \"scoring_rubrics\": false, \"upstream_dir\": \"benchmarks\\\\ScienceAgentBench-upstream\", \"upstream_dir_exists\": false}. Download benchmark_verified.zip (password=***REDACTED*** from the official SharePoint link in the upstream README and unzip under benchmarks\\ScienceAgentBench\\benchmark; clone OSU-NLP-Group/ScienceAgentBench at benchmarks\\ScienceAgentBench-upstream.",
+  "exit_reason": "official_evaluator_unavailable",
+  "started_at": "2026-10-08T14:49:35.679450+00:00",
+  "finished_at": "2026-10-08T14:51:23.308297+00:00",
+  "extra": {
+    "instance_id": 21,
+    "pred_program": "results\\round_001_runs\\sab_verified_21__FIXED_STRATEGY__seed0\\pred_deforestation.py",
+    "prompt_path": "results\\round_001_runs\\sab_verified_21__FIXED_STRATEGY__seed0\\prompt.txt"
+  }
+}
