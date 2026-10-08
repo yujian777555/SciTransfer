@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SciTransfer Round Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "round",
+    "state",
+    "summary",
+    "source_commit",
+    "environment",
+    "runs",
+    "tests",
+    "acceptance",
+    "blockers",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "round": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "state": {
+      "enum": [
+        "AWAITING_PLANNER_REVIEW",
+        "PARTIAL",
+        "BLOCKED"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "source_commit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Implementation revision tested (nullable if final commit is reported outside JSON)."
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "benchmark",
+        "upstream_ref",
+        "official_evaluator_verified"
+      ],
+      "properties": {
+        "benchmark": {
+          "type": "string"
+        },
+        "upstream_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "official_evaluator_verified": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "task_id",
+          "domain",
+          "arm",
+          "seed",
+          "official_evaluation",
+          "status",
+          "score",
+          "trace_path"
+        ],
+        "properties": {
+          "task_id": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "arm": {
+            "enum": [
+              "NO_STRATEGY",
+              "FIXED_STRATEGY",
+              "PLACEBO"
+            ]
+          },
+          "seed": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "official_evaluation": {
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "SUCCESS",
+              "FAILED",
+              "BLOCKED",
+              "ERROR"
+            ]
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "trace_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cost_usd": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evaluator_output_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "strategy_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "tests": {
+      "type": "object",
+      "required": [
+        "command",
+        "passed",
+        "failed",
+        "skipped"
+      ],
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "acceptance": {
+      "type": "object",
+      "required": [
+        "AC-01",
+        "AC-02",
+        "AC-03",
+        "AC-04",
+        "AC-05",
+        "AC-06"
+      ],
+      "patternProperties": {
+        "^AC-0[1-6]$": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "BLOCKED",
+            "NOT_EVALUATED"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "issue",
+          "evidence",
+          "next_action"
+        ],
+        "properties": {
+          "issue": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "next_action": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

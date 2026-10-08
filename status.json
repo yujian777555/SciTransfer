@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "project": "SciTransfer",
+  "repository": "yujian777555/SciTransfer",
+  "branch": "main",
+  "phase": "PHASE0",
+  "current_round": 1,
+  "state": "AWAITING_EXECUTOR",
+  "planner": "ChatGPT",
+  "executor": "Kimi",
+  "latest_plan": "planner/latest_plan.md",
+  "plan_archive": "planner/plan_001.md",
+  "latest_result": null,
+  "last_review": null,
+  "acceptance": "PENDING",
+  "base_commit_at_planning": "37dcc8623ccdc3291cac1c08c76a365b7cc55be0",
+  "project_goal": "Measure whether scientific decision strategies transfer between scientific domains using outcome-grounded paired executions; identify and avoid negative transfer.",
+  "notes": "Repo initially contained README.md only. No implementation or real benchmark result accepted or claimed."
+}
