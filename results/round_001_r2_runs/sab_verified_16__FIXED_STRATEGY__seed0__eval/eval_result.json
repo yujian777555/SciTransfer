@@ -1,0 +1,18 @@
+{
+  "task_id": "sab_verified_16",
+  "instance_id": 16,
+  "domain": "Computational Chemistry",
+  "arm": "FIXED_STRATEGY",
+  "score": 0,
+  "success_rate": 0,
+  "official_evaluation": false,
+  "modified_evaluator": true,
+  "disclosure": "Direct execution of official scoring logic without Docker harness.",
+  "log_info": "Text mismatch",
+  "program_sha256_prefix": "86acf1e1567ebe70",
+  "hash_match": true,
+  "source_run": "results/round_001_runs/sab_verified_16__FIXED_STRATEGY__seed0",
+  "run_id": "r2_direct_16_fixed_strategy_s0",
+  "exit_code": 0,
+  "output_file": "C:\\Users\\\u4e8e\u8230\\XiaomiMiMoProjects\\SciTransfer\\pred_results\\compound_filter_results.txt"
+}

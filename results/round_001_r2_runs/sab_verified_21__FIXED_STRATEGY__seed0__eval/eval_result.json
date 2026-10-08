@@ -1,0 +1,13 @@
+{
+  "task_id": "sab_verified_21",
+  "instance_id": 21,
+  "arm": "FIXED_STRATEGY",
+  "score": null,
+  "official_evaluation": false,
+  "modified_evaluator": true,
+  "error": "Output file not found: deforestation_rate.csv",
+  "program_sha256_prefix": "0ed0ee5def739864",
+  "hash_match": true,
+  "exit_code": -1,
+  "stderr": "Command '['C:\\\\Program Files\\\\Python310\\\\python.exe', 'C:\\\\Users\\\\\u4e8e\u8230\\\\XiaomiMiMoProjects\\\\SciTransfer\\\\results\\\\round_001_runs\\\\sab_verified_21__FIXED_STRATEGY__seed0\\\\pred_deforestation.py']' timed o"
+}

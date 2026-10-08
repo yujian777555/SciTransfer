@@ -19,3 +19,9 @@ sab-artifacts/
 # OS
 .DS_Store
 Thumbs.db
+
+# Extracted benchmark data (DO NOT redistribute unzipped files)
+benchmarks/ScienceAgentBench/benchmark/
+benchmark/
+pred_results/
+logs/

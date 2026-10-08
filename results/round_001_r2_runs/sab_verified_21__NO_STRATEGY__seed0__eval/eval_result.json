@@ -1,0 +1,13 @@
+{
+  "task_id": "sab_verified_21",
+  "instance_id": 21,
+  "arm": "NO_STRATEGY",
+  "score": null,
+  "official_evaluation": false,
+  "modified_evaluator": true,
+  "error": "Output file not found: deforestation_rate.csv",
+  "program_sha256_prefix": "f140501cf8e078ec",
+  "hash_match": true,
+  "exit_code": -1,
+  "stderr": "Command '['C:\\\\Program Files\\\\Python310\\\\python.exe', 'C:\\\\Users\\\\\u4e8e\u8230\\\\XiaomiMiMoProjects\\\\SciTransfer\\\\results\\\\round_001_runs\\\\sab_verified_21__NO_STRATEGY__seed0\\\\pred_deforestation.py']' timed out "
+}

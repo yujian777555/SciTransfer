@@ -5,18 +5,28 @@
   "branch": "main",
   "phase": "PHASE0",
   "current_round": 1,
-  "state": "REPLAN_REQUIRED",
+  "state": "PARTIAL",
   "planner": "ChatGPT",
   "executor": "MiMo",
   "latest_plan": "planner/latest_plan.md",
   "plan_archive": "planner/plan_001_r2.md",
-  "latest_result": "results/result_round_001_r1.json",
+  "latest_result": "results/result_round_001_r2.json",
   "last_review": "planner/reviews/review_001_r1.md",
   "acceptance": "NOT_ACCEPTED",
   "base_commit_at_planning": "1610145e04634fafe2f25447eba0ef39e5d839b3",
   "project_goal": "Measure whether scientific decision strategies transfer between scientific domains using outcome-grounded paired executions; identify and avoid negative transfer.",
-  "implementation_commit": "1610145e04634fafe2f25447eba0ef39e5d839b3",
-  "next_result_expected": "results/result_round_001_r2.json",
+  "implementation_commit": null,
+  "next_result_expected": null,
   "current_plan_kind": "ROUND_001_R2_ARTIFACT_AND_EVALUATION_CLOSURE",
-  "notes": "Planner reviewed R1 commit. 43/43 tests executor-reported but could not independently rerun (GitHub DNS unavailable in Planner container); 0/6 official evaluations. Core split/row/path fixes in source; ZIP incomplete/corrupt history, downloader 206 mismatch bug, evaluator data revision parity and WSL+credentials unresolved. Phase 0 unaccepted. Round 001-R2 scopes safe ZIP recovery and scoring six existing programs only."
+  "notes": "R2 PARTIAL: ZIP downloaded & verified (SHA256 46e715d3...). Benchmark extracted. 6 programs evaluated with disclosed MODIFIED EVALUATOR (official scoring logic, no Docker). 4/6 scored (Tasks 85/16 both arms=0, Task 21 timeout). 55/55 tests pass. All program hashes verified. No fabricated scores. Original 001/R1 data unchanged.",
+  "r2_gates": {
+    "R2-01": "PASS",
+    "R2-02": "PASS",
+    "R2-03": "PARTIAL",
+    "R2-04": "PASS",
+    "R2-05": "PARTIAL",
+    "R2-06": "PASS",
+    "R2-07": "PASS",
+    "R2-08": "NOT_EVALUATED"
+  }
 }

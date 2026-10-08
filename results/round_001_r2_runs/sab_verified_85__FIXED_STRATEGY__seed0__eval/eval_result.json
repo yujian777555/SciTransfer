@@ -1,0 +1,18 @@
+{
+  "task_id": "sab_verified_85",
+  "instance_id": 85,
+  "domain": "Bioinformatics",
+  "arm": "FIXED_STRATEGY",
+  "score": 0,
+  "success_rate": 0,
+  "official_evaluation": false,
+  "modified_evaluator": true,
+  "disclosure": "Direct execution of official scoring logic without Docker harness.",
+  "log_info": "Missing key 'argmax' for Vp03",
+  "program_sha256_prefix": "b6e31cb05291e70c",
+  "hash_match": true,
+  "source_run": "results/round_001_runs/sab_verified_85__FIXED_STRATEGY__seed0",
+  "run_id": "r2_direct_85_fixed_strategy_s0",
+  "exit_code": 0,
+  "output_file": "C:\\Users\\\u4e8e\u8230\\XiaomiMiMoProjects\\SciTransfer\\pred_results\\saliva_pred.json"
+}
