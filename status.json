@@ -1,28 +1,3 @@
-{
-  "schema_version": 1,
-  "project": "SciTransfer",
-  "repository": "yujian777555/SciTransfer",
-  "branch": "main",
-  "phase": "PHASE0C",
-  "current_round": 3,
-  "state": "BLOCKED",
-  "planner": "ChatGPT",
-  "executor": "MiMo",
-  "latest_plan": "planner/latest_plan.md",
-  "plan_archive": "planner/plan_003_r1.md",
-  "latest_result": "results/result_round_003_r1.json",
-  "last_review": "planner/reviews/review_003.md",
-  "acceptance": "BLOCKED_SOURCE_ACCESS",
-  "base_commit_at_planning": "abe6aa2a7d511859fd164a82287238177abdca2f",
-  "implementation_commit": "15ce557c994c1dcd38dec66837fa2359ba9db4e1",
-  "next_result_expected": "results/result_round_003_r1.json",
-  "current_plan_kind": "ROUND_003_R1_ONE_TIME_SCIAGENTGYM_OFFLINE_UNBLOCK",
-  "decision": "BLOCKED_SOURCE_ACCESS",
-  "authorized_api_cost_usd": 0,
-  "authorized_paid_episodes": 0,
-  "authorized_runtime_timebox_minutes": 120,
-  "upstream_repository": "CMarsRover/SciAgentGYM",
-  "upstream_commit_pin": "e9dbbea4369d67694e38bf8be67bedbcaf9e9300",
-  "project_goal": "Measure whether scientific decision strategies transfer between scientific domains using outcome-grounded paired executions; identify and avoid negative transfer.",
-  "notes": "BLOCKED: GitHub network unreachable. Both source access routes failed (git clone + archive). Cannot acquire SciAgentGYM source. Per plan: STOP. Phase 1 unauthorized."
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6f135b5637a1a270bd477626dfad30dbbc6f05cb9abdb341e9125309f58fa1f3
+size 1355
