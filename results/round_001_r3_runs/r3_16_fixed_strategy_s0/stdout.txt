@@ -1,0 +1,6 @@
+Total hit compounds: 3641
+Invalid SMILES skipped: 3641
+PAINS/Brenk-filtered: 0
+Similarity-filtered: 0
+Kept compounds: 0
+Saved to: pred_results\compound_filter_results.txt

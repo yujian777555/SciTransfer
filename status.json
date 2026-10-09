@@ -5,18 +5,28 @@
   "branch": "main",
   "phase": "PHASE0",
   "current_round": 1,
-  "state": "REPLAN_REQUIRED",
+  "state": "PARTIAL",
   "planner": "ChatGPT",
   "executor": "MiMo",
   "latest_plan": "planner/latest_plan.md",
   "plan_archive": "planner/plan_001_r3.md",
-  "latest_result": "results/result_round_001_r2.json",
+  "latest_result": "results/result_round_001_r3.json",
   "last_review": "planner/reviews/review_001_r2.md",
   "acceptance": "NOT_ACCEPTED",
   "base_commit_at_planning": "65c425ac0509e1d612ac322f47e7172ea9b87c02",
   "project_goal": "Measure whether scientific decision strategies transfer between scientific domains using outcome-grounded paired executions; identify and avoid negative transfer.",
-  "implementation_commit": "12a6dfa902886f3a9c12ead5d6b25fc18f1f4e73",
-  "next_result_expected": "results/result_round_001_r3.json",
+  "implementation_commit": null,
+  "next_result_expected": null,
   "current_plan_kind": "ROUND_001_R3_SCORER_PARITY_AND_AB_ISOLATION",
-  "notes": "Planner accepted Git sync/junction ignore at 65c425a. Round 001-R2 is NOT ACCEPTED: 4 provisional zero scores from reimplemented scorer with shared pred_results, ineffective hash gate and stale-output risk, 2 null GIS timeouts, 0 actual original Docker official scores. 55 tests are executor-reported. New R3: hash-verified direct original scorer and fully isolated six candidate executions, bounded Docker diagnostic, honest provenance; no new model generation."
+  "notes": "R3 PARTIAL: Official scorer semantics verified (#85 isclose, #16 set coverage, #21 MAE≤5%). 6/6 programs re-evaluated with DIRECT_ORIGINAL_SCORER in isolated workspaces. Full SHA gate. No shared pred_results. Results: 85 A/B=0/0 (KeyError), 16 A/B=0/0 (overlap=0), 21 A/B=TIMEOUT. 2 valid pairs. 69/69 tests. R2 scores invalidated (reimplemented).",
+  "r3_gates": {
+    "R3-01": "PASS",
+    "R3-02": "PASS",
+    "R3-03": "PASS",
+    "R3-04": "PARTIAL",
+    "R3-05": "PASS",
+    "R3-06": "PASS",
+    "R3-07": "PASS",
+    "R3-08": "NOT_EVALUATED"
+  }
 }

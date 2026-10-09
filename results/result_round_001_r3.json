@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "round": 1,
+  "round_label": "001_r3",
+  "state": "PARTIAL",
+  "summary": "R3 scoring parity and A/B isolation completed. All 3 official scorer semantics verified by direct source inspection and executable parity tests. 6/6 programs re-evaluated with DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER in isolated workspaces. Full SHA256 gate enforced. No shared pred_results. Results: Task 85 A/B = 0/0 (KeyError 'argmax' → official returns 0), Task 16 A/B = 0/0 (set overlap 0.0), Task 21 A/B = TIMEOUT (600s). 2 valid A/B pairs. 69/69 tests pass. R2 provisional scores withdrawn as reimplemented.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "ScienceAgentBench (verified split)",
+    "upstream_ref": "c26e151ed601ba109dc4d35e057ff8e73fec469d",
+    "official_evaluator_verified": false,
+    "modified_evaluator": true,
+    "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+    "provenance_note": "Official scorer eval() functions directly imported and called. Not Docker harness (ORIGINAL_OFFICIAL_DOCKER). Not reimplementation (REIMPLEMENTED_EXPLORATORY). R2 scores withdrawn as reimplemented.",
+    "scorer_hashes": {
+      "85": "31920bb30c6926d2598c00ae8a1bd6d80158ed2afe3ed96ca8bb982f8858ceef",
+      "16": "216935482b08427dc5c713f4c4b0a83f46eb637846c7f847cfab44cf270bf873",
+      "21": "c1b2ca7c15c1f2b4ba3520e9d89e35a5656a1c98e63cfac58f63221b46f49819"
+    },
+    "scorer_semantics_verified": {
+      "85": "JSON key-set equality + math.isclose(rel_tol=1e-9) for floats, exact for strings. Exceptions → score=0 (official harness behavior).",
+      "16": "Set intersection coverage: overlap = len(pred∩gold)/len(gold), score=1 if overlap==1.0. Extra rows in pred ALLOWED.",
+      "21": "MAE ratio: abs(pred-gold)/gold ≤ 0.05 (5% tolerance). NOT exact text match."
+    },
+    "os": "Windows 10/11",
+    "python": "3.10.1",
+    "timeout_per_program_s": 600
+  },
+  "runs": [
+    {
+      "task_id": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "status": "SUCCESS",
+      "score": 0,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "58c7bc1f4ae66bfd",
+      "scorer_sha256": "31920bb30c6926d2",
+      "run_id": "r3_85_no_strategy_s0",
+      "duration_s": null,
+      "log_info": "EXCEPTION: KeyError 'argmax' → official harness returns 0",
+      "error": "Scorer exception (official harness would return 0): KeyError: 'argmax'"
+    },
+    {
+      "task_id": "sab_verified_85",
+      "domain": "Bioinformatics",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "status": "SUCCESS",
+      "score": 0,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "b6e31cb05291e70c",
+      "scorer_sha256": "31920bb30c6926d2",
+      "run_id": "r3_85_fixed_strategy_s0",
+      "duration_s": null,
+      "log_info": "EXCEPTION: KeyError 'argmax' → official harness returns 0",
+      "error": "Scorer exception (official harness would return 0): KeyError: 'argmax'"
+    },
+    {
+      "task_id": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "status": "SUCCESS",
+      "score": 0,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "df1a03d317d1d7c4",
+      "scorer_sha256": "216935482b08427d",
+      "run_id": "r3_16_no_strategy_s0",
+      "duration_s": null,
+      "log_info": "overlap: 0.0",
+      "error": null
+    },
+    {
+      "task_id": "sab_verified_16",
+      "domain": "Computational Chemistry",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "status": "SUCCESS",
+      "score": 0,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "86acf1e1567ebe70",
+      "scorer_sha256": "216935482b08427d",
+      "run_id": "r3_16_fixed_strategy_s0",
+      "duration_s": null,
+      "log_info": "overlap: 0.0",
+      "error": null
+    },
+    {
+      "task_id": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "arm": "NO_STRATEGY",
+      "seed": 0,
+      "status": "TIMEOUT",
+      "score": null,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "f140501cf8e078ec",
+      "scorer_sha256": "c1b2ca7c15c1f2b4",
+      "run_id": "r3_21_no_strategy_s0",
+      "duration_s": 601.3,
+      "log_info": "Timeout after 600s",
+      "error": "Timeout after 600s (geospatial operations on 36MB GeoJSON)"
+    },
+    {
+      "task_id": "sab_verified_21",
+      "domain": "Geographical Information Science",
+      "arm": "FIXED_STRATEGY",
+      "seed": 0,
+      "status": "TIMEOUT",
+      "score": null,
+      "official_evaluation": false,
+      "provenance": "DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER",
+      "program_sha256": "0ed0ee5def739864",
+      "scorer_sha256": "c1b2ca7c15c1f2b4",
+      "run_id": "r3_21_fixed_strategy_s0",
+      "duration_s": 601.3,
+      "log_info": "Timeout after 600s",
+      "error": "Timeout after 600s (geospatial operations on 36MB GeoJSON)"
+    }
+  ],
+  "tests": {
+    "command": "python -m pytest tests/ -v",
+    "passed": 69,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "69 tests: 14 R3 scoring/isolation (scorer parity for #85/16/21 corner cases, hash gate, workdir isolation, no stale output, exception propagation), 12 R2 downloader safety, 19 R1 evaluator integrity, 24 original safeguards."
+  },
+  "acceptance": {
+    "R3-01": "PASS",
+    "R3-02": "PASS",
+    "R3-03": "PASS",
+    "R3-04": "PARTIAL",
+    "R3-05": "PASS",
+    "R3-06": "PASS",
+    "R3-07": "PASS",
+    "R3-08": "NOT_EVALUATED"
+  },
+  "acceptance_detail": {
+    "R3-01": "All 3 scorer SHA256 verified and semantics confirmed by source reading + executable parity tests. No protected gold data committed.",
+    "R3-02": "6/6 programs verified by FULL SHA256 (64-hex). Isolated workdirs with unique pred_results/. No stale output. Tests prove isolation.",
+    "R3-03": "Scorer parity demonstrated: #16 extra rows allowed (set coverage), #21 5% tolerance (not exact match), #85 isclose(rel_tol=1e-9). R2 results labeled reimplemented/invalid.",
+    "R3-04": "6 attempts with original scorer: 4 scored (all 0), 2 timeout. 2 valid A/B pairs (Tasks 85, 16). Need 3 for full acceptance. PARTIAL.",
+    "R3-05": "Provenance clearly separated: DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER (not Docker, not reimplementation). Docker blocked by network. OPENAI_API_KEY disclosed as DashScope.",
+    "R3-06": "69/69 tests pass. No skipped failures.",
+    "R3-07": "Historical 001/R1/R2 data unchanged. No new model calls. R2 'UNMODIFIED' claim corrected in R3 preflight.",
+    "R3-08": "This commit + push. status=PARTIAL. Planner alone accepts."
+  },
+  "blockers": [
+    {
+      "issue": "Task 21 (GIS) programs time out at 600s on 36MB GeoJSON geospatial operations.",
+      "evidence": "Both arms (NO_STRATEGY, FIXED_STRATEGY) timeout at 601.3s. unary_union + buffer + intersection on 36MB data too slow.",
+      "next_action": "Either increase timeout (1200s+) with same cap for both arms, or accept timeout as outcome. Do not modify program semantics. GIS pair cannot complete without Planner decision."
+    },
+    {
+      "issue": "Original Docker evaluation (ORIGINAL_OFFICIAL_DOCKER) blocked by network.",
+      "evidence": "apt-get inside Docker cannot reach package mirrors. Docker Desktop installed but build fails.",
+      "next_action": "Configure Docker network access or use pre-built images. Current DIRECT_ORIGINAL_SCORER results are separate and clearly labeled."
+    }
+  ],
+  "artifacts": [
+    "results/round_001_r3_preflight.md",
+    "results/round_001_r3_evaluation_matrix.csv",
+    "results/round_001_r3_runs/r3_all_results.json",
+    "results/round_001_r3_runs/r3_85_no_strategy_s0/",
+    "results/round_001_r3_runs/r3_85_fixed_strategy_s0/",
+    "results/round_001_r3_runs/r3_16_no_strategy_s0/",
+    "results/round_001_r3_runs/r3_16_fixed_strategy_s0/",
+    "results/round_001_r3_runs/r3_21_no_strategy_s0/",
+    "results/round_001_r3_runs/r3_21_fixed_strategy_s0/",
+    "src/scitransfer/r3_eval.py",
+    "tests/test_r3_scoring_isolation.py"
+  ],
+  "erratum": "R2 result_round_001_r2.json claimed 'All eval() functions are UNMODIFIED' but used reimplemented scoring (exact text match for #16/#21 instead of set coverage / 5% tolerance). R2 scores are INVALIDATED. R3 uses direct import of official scorer eval() functions.",
+  "limitations": [
+    "Provenance is DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER, not ORIGINAL_OFFICIAL_DOCKER. Scores are informative but not 'official Docker' results.",
+    "Task 21 pair blocked on timeout. Only 2/3 valid A/B pairs.",
+    "Preregistration timestamp remains UNVERIFIED.",
+    "Experiment is single-shot strategy prompt ablation, not adaptive research policy.",
+    "OPENAI_API_KEY is DashScope (non-OpenAI); not used for non-visual scoring."
+  ]
+}

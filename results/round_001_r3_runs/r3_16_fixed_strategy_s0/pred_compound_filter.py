@@ -1,0 +1,122 @@
+import csv
+import os
+import sys
+
+from rdkit import Chem, DataStructs
+from rdkit.Chem import AllChem
+from rdkit.Chem.FilterCatalog import FilterCatalog, FilterCatalogParams
+
+
+HITS_PATH = os.path.join("benchmark", "datasets", "compound_filter", "hits.csv")
+TRAIN_PATH = os.path.join("benchmark", "datasets", "compound_filter", "train.csv")
+OUTPUT_DIR = "pred_results"
+OUTPUT_PATH = os.path.join(OUTPUT_DIR, "compound_filter_results.txt")
+
+
+def build_filter_catalog():
+    """Build an RDKit FilterCatalog with PAINS and Brenk filters if available."""
+    params = FilterCatalogParams()
+    catalogs = FilterCatalogParams.FilterCatalogs
+
+    for name in ["PAINS", "PAINS_A", "PAINS_B", "PAINS_C", "BRENK"]:
+        if hasattr(catalogs, name):
+            params.AddCatalog(getattr(catalogs, name))
+        else:
+            print(f"Warning: filter catalog '{name}' is not available in this RDKit version.",
+                  file=sys.stderr)
+
+    return FilterCatalog(params)
+
+
+def get_mol(smiles):
+    """Return a sanitized RDKit molecule or None if parsing fails."""
+    smiles = (smiles or "").strip()
+    if not smiles:
+        return None
+    try:
+        return Chem.MolFromSmiles(smiles)
+    except Exception:
+        return None
+
+
+def get_fingerprint(mol):
+    """Return a Morgan fingerprint (radius 2, 2048 bits)."""
+    return AllChem.GetMorganFingerprintAsBitVect(mol, radius=2, nBits=2048)
+
+
+def load_active_fingerprints(path):
+    """Load active (ACTIVITY == 1) molecules from train.csv and return fingerprints."""
+    fingerprints = []
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            try:
+                activity = float(row.get("ACTIVITY", "0") or 0)
+            except ValueError:
+                continue
+
+            if activity != 1.0:
+                continue
+
+            mol = get_mol(row.get("SMILES", ""))
+            if mol is not None:
+                fingerprints.append(get_fingerprint(mol))
+
+    return fingerprints
+
+
+def main():
+    catalog = build_filter_catalog()
+    active_fps = load_active_fingerprints(TRAIN_PATH)
+
+    kept_smiles = []
+    total = 0
+    invalid = 0
+    substructure_filtered = 0
+    similarity_filtered = 0
+
+    with open(HITS_PATH, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            total += 1
+            smiles = (row.get("SMILES") or "").strip()
+
+            mol = get_mol(smiles)
+            if mol is None:
+                invalid += 1
+                continue
+
+            # Remove compounds with PAINS or Brenk substructures.
+            if catalog.GetFirstMatch(mol) is not None:
+                substructure_filtered += 1
+                continue
+
+            fp = get_fingerprint(mol)
+
+            if active_fps:
+                max_sim = max(DataStructs.BulkTanimotoSimilarity(fp, active_fps))
+            else:
+                max_sim = 0.0
+
+            # Keep only if max Tanimoto similarity to actives is < 0.5.
+            if max_sim >= 0.5:
+                similarity_filtered += 1
+                continue
+
+            kept_smiles.append(smiles)
+
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        for smiles in kept_smiles:
+            f.write(smiles + "\n")
+
+    print(f"Total hit compounds: {total}")
+    print(f"Invalid SMILES skipped: {invalid}")
+    print(f"PAINS/Brenk-filtered: {substructure_filtered}")
+    print(f"Similarity-filtered: {similarity_filtered}")
+    print(f"Kept compounds: {len(kept_smiles)}")
+    print(f"Saved to: {OUTPUT_PATH}")
+
+
+if __name__ == "__main__":
+    main()
