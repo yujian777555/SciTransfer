@@ -1,17 +1,17 @@
-# SciTransfer — Executor Handoff: Round 001-R3
+# SciTransfer — Executor Handoff: Round 002 (Phase 0-B)
 
-你的角色是 SciTransfer Executor（Kimi/MiMo），ChatGPT 是 Planner。唯一事实来源是 https://github.com/yujian777555/SciTransfer 的 main 分支。
+你是 SciTransfer Executor（Kimi/MiMo），ChatGPT 是科研 Planner。仓库 main 为唯一事实来源：https://github.com/yujian777555/SciTransfer
 
-## 立刻操作
+**Planner 已关闭 Round 001：PARTIAL / INCONCLUSIVE，未验收其跨领域策略迁移结果。现在开始 Round 002（Phase 0-B）：Benchmark 适用性与多步科研决策可执行性评估。**
 
-1. git pull --ff-only；读取 status.json、planner/reviews/review_001_r2.md、planner/latest_plan.md 和 results/result_round_001_r2.json。
-2. Round 001-R2 **未通过 Planner 验收**：虽然 ZIP 已报告完成下载且 55 项测试报告通过，但 scripts/r2_evaluate_all.py 的评分器为手写版本，A/B 共用 pred_results，哈希不匹配也继续执行，失败仍可能读旧文件。R2 的四个 0 分不能直接用于科研结论。
-3. 严格执行 **Round 001-R3**。只允许重新执行已有六份程序；不重新生成程序、不调用 LLM、不训练模型、不改变研究题目。
-4. 第一优先级是从本地受限 benchmark_verified.zip 中确认三个 Task 的真实官方评分脚本与 SHA；直接调用原始函数，不能用重新实现冒充。受限 gold/原始数据不能推到 GitHub。
-5. 第二优先级是创建六个严格独立的 A/B 工作目录，使用完整 SHA256 硬校验，禁止读取 REPO_ROOT/pred_results 旧结果；程序退出码非零/超时就返回 null 分，保存详细证据。
-6. 第三优先级是先 Task85 A 最小 smoke，再完整评估 6 个原始程序。Task21 的超时可以进行一次有上限的诊断，不能改写程序或无限重试。
-7. 官方原版 Docker 若因网络失败，按计划有限尝试、记录日志即可；使用原始官方 scorer 的本地修改版 runner 必须标记为 DIRECT_ORIGINAL_SCORER_MODIFIED_RUNNER，绝不写 official_evaluation=true。
-8. 运行已有 55 项测试及新增的 scorer 一致性/隔离/哈希/超时集成测试。
-9. 写 results/result_round_001_r3.json、results/round_001_r3_runs/、status.json，提交并 push main。最后回报 SHA、六臂结果、实际测试总数、R3-01～08 的每项状态及阻碍。
+开始前执行 git pull --ff-only，读取 status.json、planner/reviews/review_001_r3.md、planner/latest_plan.md。
 
-**不得自行接受 Phase 0 或进入 Round 002。** 如无法取得可靠评分，请返回 PARTIAL/BLOCKED 和最小可操作的解阻步骤，而不是制造 0 分或伪造官方成绩。
+1. 保留过去 001/R1/R2/R3 原始记录不改，增加 results/round_001_r3_erratum.md 说明 R3 300s vs hardcoded 601.3s、R3 CSV 与 JSON 行数不匹配、Task85 exception->SUCCESS/0、Task16 空结果、Task21 未评分，以及候选程序能访问 gold junction 的风险。不能编造追溯时间。
+2. **不要再无期限重跑 Task21，也不需要继续修 Docker 十几轮。**
+3. 按新计划验证至少两个候选环境（推荐 DiscoveryWorld 与现有 ScienceAgentBench 或 SciAgentGym），必须实测可安装、可 reset、真正有科研 action/observation/score。明确区分不同主题与真正跨学科目标。
+4. 仅为一个最合适环境实现最小多步决策 runner：observe→decide→act→evidence→decide again；每臂可用工具相同，不允许候选程序读取隐藏 gold。
+5. 做极小规模、有上限的真实校准试验（建议总共 6-10 episodes，API 花费上限 1 USD，超出先问用户），报告真实 scorer、轨迹、成本及 floor/ceiling 情况。此处手写策略仅为 feasibility，**不能号称已学会迁移**。
+6. 给出 GO/CONDITIONAL/NO-GO 的研究决策。记录 accepted/blocked 项、具体原始日志、版本及 hashes。
+7. 写入 results/result_round_002.json，更新 status.json，测试后 commit/push main；最后汇报最终 SHA、任务/领域覆盖、多步轨迹、真实评分和是否达到 R2B-01～08。
+
+**禁止**重新生成 Round001 六份代码，擅自开始 Phase1 训练，捏造跨领域效果，自行宣布 Planner 验收。
