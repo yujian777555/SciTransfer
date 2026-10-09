@@ -1,13 +1,15 @@
-# SciTransfer Executor Handoff — Round 002-R2
+# SciTransfer — Executor handoff, Round 003 (Phase 0-C)
 
-你是 SciTransfer Executor。ChatGPT 是 Planner。仓库 main: https://github.com/yujian777555/SciTransfer
+你是 Executor（Kimi/MiMo），Planner 是 ChatGPT。GitHub main: https://github.com/yujian777555/SciTransfer 。
 
-拉取 main，阅读 status.json、planner/reviews/review_002_r1.md、planner/latest_plan.md、results/result_round_002_r1.json。
+**最新 Planner 决定**：Round002-R2 四次 DeepSeek 试点不满足科研验收，当前 DiscoveryWorld + prompt 配置 NO-GO（不等于 SciTransfer 论文方向被否定）。不能继续付费刷实验，不能启动 Phase1/预测器/controller。
 
-**正式决定**：R1 工程进展部分通过，但科研构念未验收。仅**条件性授权 DeepSeek 极小试验**（最多四个付费 episode，全部 API 额外费用 <= 1 美元）；离线 G0/G1/G2 任一不通过，**不得调用模型**。
+先 `git pull --ff-only`，完整读取 `status.json`、`planner/reviews/review_002_r2.md`、`planner/latest_plan.md`。
 
-修复核心问题：新提交的 *_trusted.json 含 hidden criticalHypotheses，不能再将任何 gold/scorecard 提交 Git；旧种子 42/43/100 禁止用于后续盲评。已报告的 4 有效动作都只是 MOVE_DIRECTION east，而 baseline 尝试 pickup wall：这不是科研策略效果。必须证明真实科学实验性动作和观察反馈改变后续选择。两个臂必须**同一基础 LLM Agent，同一动作/预算/工具**，只改变预注册策略内容；此前不同 rule-policy 的 4:0 无法因果解释。核对测试：结果 JSON 写 21 pass+1 skip 的 R1 子集，加 82 老测试；聊天“104 pass/0 skip”不能未经完整复跑照搬。
+1. 添加 Round002-R2 勘误：预注册和结果在同一 commit，时间戳22Z晚于提交13:42Z，实际 v2 策略文本和参数不同，G1 Chemistry seed200与目标试验重复，模型调用原始轨迹和用量缺失、成本估算、测试日志预检留有占位符。不可修改历史或倒填证据。
+2. **Round003 零付费 API 预算**：对真实公开仓库 https://github.com/CMarsRover/SciAgentGYM 做 **最多2小时** 小型可执行适用性验证，不安装几天。核对多步科研工具、真实 eval、种子/复现、gold隔离、物理/化学/生命科学等学科独立性。没有验证成功就如实 NO-GO/BLOCKED。
+3. 无付费模型，仅能通过公开 dev 任务/离线手动合法工具调用做最小机械烟雾测试；至少2步科学工具、原版可信评分；第二学科可行性。禁止把 gold 放进候选观察或仓库。
+4. 编制与项目宪章相符的**未来**实验识别协议：源领域策略→冻结候选→未见目标领域任务、相同LLM/工具/预算的 A/B/PLACEBO，评价真实科学决策、负迁移和拒绝迁移。独立提交预注册，不得事后补。
+5. 真实运行全部测试，记录原始命令结果，写 `results/result_round_003.json`、两份研究审计文档，更新 status.json，commit/push，最后汇报 R3C-01～08。
 
-先做零 API 调用的 G0（隐藏信息隔离及动态 canary）、G1（合法且有意义动作、neutral baseline）、G2（公平单 LLM agent，新的冻结种子/策略/成本、全量 pytest）并提交 preflight/preregistration；成功后允许一次极低费用 smoke 和最多 2 场景×2 臂共4个 scored episode。不可接触秘密、不许训练策略模型、不许声称 learned cross-domain transfer。
-
-完成后提交 results/result_round_002_r2.json、报告、测试和 status.json，push main，汇报最终 SHA、G0–G3、R2R2-01~08、模型调用/费用和实测效果。遇阻返回 BLOCKED，不得无限修补。
+禁止自行宣告科研结论已通过、切换论文方向、训练或追加 API 花费。只交证据与 GO/CONDITIONAL/NO-GO，由 Planner 进一步决定。
