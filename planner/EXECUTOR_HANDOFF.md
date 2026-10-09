@@ -1,12 +1,19 @@
-# SciTransfer Executor handoff — R3-R2 CLOSED, AWAIT USER
+# SciTransfer Executor handoff — USER APPROVED B, ROUND 004 DESIGN ONLY
 
-Planner 已核验远端最新 HEAD `e7bd4edfea84d88b60bc28feda0dafd94f6de8f2`。Git LFS 交接修复成功；原生上游物理函数与化学类已发现，后续化学新增 `r3r2_chem_compute.py` 通过 `MinimalSciEnv.step()` 实际尝试计算，但没有 assert + 可审核输出日志。两步物理函数没有真正传递第一次计算结果作为第二次调用参数；不存在已经证实的证据依赖决策。Canary 只在合成数据执行；官方评分 mismatch 触发 LLM judge。
+已获用户明确批准换到 **受控跨领域科学研究过程测量方法（B 路线）**。ChatGPT = Planner；Kimi/MiMo = Executor。仓库 main：https://github.com/yujian777555/SciTransfer 。
 
-Planner 最终判定：R3-R2 PARTIAL / 科研实验验收不通过，`status.json=BLOCKED`。**不得再自动修 SciAgentGYM、不得开展 Round004、不得训练 Phase1、不得用收费 API**。
+这次**不是再次修 SciAgentGYM**，也不是允许马上建大规模 simulator。新的 Round 004 (Phase 0-D) 只产出论文级研究设计与技术可行性审计。
 
-现在阅读 `planner/reviews/review_003_r2.md` 和 `planner/hold_after_round_003_r2.md`，等用户决定：
-- B: 经用户明确许可，Planner 重设计确定性外部评分的受控跨学科科学过程环境；
-- A: 用户另行提供经过独立确认的原生 benchmark tool/scorer、干净 loader 和评分环境；
-- C: 暂停。
+git pull --ff-only 后完整阅读：
+- status.json
+- planner/PROJECT_CHARTER.md
+- planner/latest_plan.md
+- research/phase0d_method_proposal.md
+- research/phase0d_related_work_novelty_audit.md
+- research/phase0d_experiment_protocol.md
 
-旧分数和数据必须原样保留，不准私自宣布跨领域科研策略已经有效。
+必须围绕：Bioinformatics 批次与重复验证、Chemistry 有噪声实验优化、GIS 空间抽样及地理阻塞验证；这三类必须具有真实不同的统计/物理失败机制，不是同个bandit换名。设计隐藏真值的独立评分器和相同 agent/工具/预算的 paired A/B/placebo，源领域轨迹学习策略、目标领域留出测试、负迁移与校准拒绝。明确 **synthetic scientific workflow**, 不准表述为真实湿实验提升。
+
+特别注意已撞车文献：SciAgentGym(ICML26)已经研究科学工具迁移，Memory Transfer Learning(2026)讨论抽象迁移和负迁移，MCMA已研究分层记忆。创新只能严谨评估 outcome-calibrated selection / mechanistic transfer limits，不得宣称 first / SOTA。
+
+交付 method、novelty matrix、experiment matrix、engineering spec、research decision、result_round_004_design.json 和 status.json；每个文件普通 Git 可读。**零付费 API，零 GPU，零模型训练，零 scored target tests，不能进入 Phase1**。完成后 push main 并交 Planner 正式验收，再决定是否批准 CPU MVP。
