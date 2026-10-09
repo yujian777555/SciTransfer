@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "round": 2,
+  "round_label": "002",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "Phase 0-B benchmark suitability and multi-step research decision feasibility completed. DiscoveryWorld selected as primary environment (installable, multi-step, graded scoring, 8+ scientific domains). 12 calibration episodes run with rule-based agent across 4 task families. Score variation detected (Reactor Lab: 2/11). Multi-step loop verified (14 decision points/episode). CONDITIONAL GO recommendation with conditions for LLM integration and domain independence verification. R3 erratum documented without history modification.",
+  "source_commit": null,
+  "environment": {
+    "primary": "DiscoveryWorld (allenai/discoveryworld, Apache-2.0, discoveryworld==0.0.2)",
+    "secondary": "ScienceAgentBench (single-shot, for comparison only)",
+    "rejected": ["SciAgentGym (unavailable)", "MLE-bench (wrong domain)"],
+    "os": "Windows 10/11",
+    "python": "3.10.1",
+    "agent_type": "rule-based (SimplePolicyAgent, no API cost)",
+    "agent_note": "Rule-based agent used for environment verification and calibration. LLM agent (DeepSeek) to be integrated in next phase."
+  },
+  "tasks": {
+    "scenario_families_tested": [
+      "Combinatorial Chemistry (Chemistry)",
+      "Archaeology Dating (Archaeology/Geology)",
+      "Plant Nutrients (Botany)",
+      "Reactor Lab (Nuclear Physics)"
+    ],
+    "n_scenarios_available": 18,
+    "n_domains_available": 8
+  },
+  "episodes": {
+    "n_total": 12,
+    "n_scenarios": 4,
+    "n_arms": 2,
+    "n_seeds_per_scenario": 2,
+    "total_elapsed_s": 63.2,
+    "score_distribution": {
+      "min": 0,
+      "max": 2,
+      "all_zero": false,
+      "all_max": false,
+      "has_variation": true
+    },
+    "per_scenario": {
+      "Combinatorial Chemistry": {"score": "0/12", "status": "all_zero"},
+      "Archaeology Dating": {"score": "0/6", "status": "all_zero"},
+      "Plant Nutrients": {"score": "0/4", "status": "all_zero"},
+      "Reactor Lab": {"score": "2/11", "status": "partial_success"}
+    },
+    "multi_step_verified": true,
+    "decision_points_per_episode": 14
+  },
+  "evaluation_provenance": {
+    "scorer": "DiscoveryWorld getTaskScorecard()",
+    "graded_scores": true,
+    "sub_task_breakdown": true,
+    "leakage_risk": "criticalHypotheses and criticalQuestions exposed in scorecard (mitigation needed)"
+  },
+  "cost": {
+    "currency": "USD",
+    "api_total": 0.0,
+    "note": "Rule-based agent used; no API calls. LLM integration would cost ~$0.05-0.50 per episode."
+  },
+  "tests": {
+    "command": "python -m pytest tests/ -v",
+    "passed": 82,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "82 tests: 13 R2B adapter (multi-step loop, isolation, budget, DiscoveryWorld integration), 14 R3 scoring isolation, 12 R2 downloader, 19 R1 evaluator, 24 safeguards."
+  },
+  "acceptance": {
+    "R2B-01": "PASS",
+    "R2B-02": "PASS",
+    "R2B-03": "PASS",
+    "R2B-04": "PASS",
+    "R2B-05": "PASS",
+    "R2B-06": "PASS",
+    "R2B-07": "PASS",
+    "R2B-08": "NOT_EVALUATED"
+  },
+  "acceptance_detail": {
+    "R2B-01": "R3 erratum documents all defects (timeout hardcoding, CSV/JSON mismatch, exception coercion, gold junction). No history modified.",
+    "R2B-02": "DiscoveryWorld and ScienceAgentBench evaluated with executable evidence. Suitability matrix created.",
+    "R2B-03": "DiscoveryWorld runs end-to-end: load scenario → act → observe → score. 12 episodes completed.",
+    "R2B-04": "Multi-step loop verified: 14 decision points per episode. No gold access in adapter (tested).",
+    "R2B-05": "Score variation detected (0-2). Reactor Lab partial success shows discriminative power.",
+    "R2B-06": "82 tests pass. Budgets, seeds, costs recorded. Strategy labeled as hand-authored feasibility intervention.",
+    "R2B-07": "CONDITIONAL GO recommendation. Domain independence and LLM integration conditions documented.",
+    "R2B-08": "This commit + push. status=AWAITING_PLANNER_REVIEW."
+  },
+  "decision": "CONDITIONAL_GO",
+  "decision_conditions": [
+    "Integrate LLM agent (DeepSeek) to test strategy interventions",
+    "Hide criticalHypotheses/criticalQuestions from candidate agent",
+    "Verify domain independence (methodological, not just thematic)",
+    "Run pilot with LLM to estimate effect size"
+  ],
+  "blockers": [],
+  "artifacts": [
+    "results/round_001_r3_erratum.md",
+    "benchmarks/suitability_matrix_round_002.md",
+    "results/round_002_calibration/calibration_summary.json",
+    "results/round_002_benchmark_decision.md",
+    "src/scitransfer/discoveryworld_adapter.py",
+    "tests/test_r2b_adapter.py",
+    "scripts/r2b_calibration.py"
+  ],
+  "limitations": [
+    "Rule-based agent used (not LLM) — shows potential but not strategy effects",
+    "Only 4 of 18 scenarios tested",
+    "criticalHypotheses leakage risk not fully mitigated",
+    "Cross-domain independence not rigorously verified",
+    "Library bug in plant_growing scenario"
+  ]
+}

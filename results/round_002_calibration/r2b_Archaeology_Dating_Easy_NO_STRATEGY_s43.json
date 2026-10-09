@@ -1,0 +1,74 @@
+{
+  "episode_id": "r2b_Archaeology_Dating_Easy_NO_STRATEGY_s43",
+  "scenario": "Archaeology Dating",
+  "difficulty": "Easy",
+  "seed": 43,
+  "arm": "NO_STRATEGY",
+  "agent_id": "SimplePolicyAgent",
+  "model": "rule-based-v1",
+  "status": "FAILED",
+  "steps_taken": 15,
+  "final_score": 0,
+  "max_score": 6,
+  "score_normalized": 0.0,
+  "n_decision_points": 14,
+  "elapsed_s": 4.631,
+  "n_observations": 0,
+  "n_actions": 0,
+  "scorecard": [
+    {
+      "taskName": "ArchaeologyDigTaskEasy",
+      "taskDescription": "You are in archaeological dig store room on Planet X.  3 ancient artifacts have been found. Your task is to date the artifacts with the radiocarbon meter.  Then, once completed, place the red flag directly beside (i.e. one square right/to the west) of the artifact with the oldest age.",
+      "score": 0,
+      "maxScore": 6,
+      "scoreNormalized": 0.0,
+      "completed": false,
+      "completedSuccessfully": false,
+      "scoreCard": [
+        {
+          "name": "Take radiocarbon meter",
+          "description": "The radiocarbon meter has been in an agent's inventory",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Take flag",
+          "description": "The flag has been in an agent's inventory",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Artifacts dated",
+          "description": "The artifacts have been dated with the radiocarbon meter",
+          "maxScore": 3,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": "The following artifacts have been dated: set()"
+        },
+        {
+          "name": "Flag placed",
+          "description": "The flag has been placed in the correct location",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        }
+      ],
+      "criticalHypotheses": [
+        "The artifact with an age of 725000 years is the oldest. The ages of the other artifacts (in years) are: 150000, 675000."
+      ],
+      "criticalQuestions": [
+        "Does it clearly state that the artifact with age 725000 years is the oldest?",
+        "Does it clearly state the ages of the other younger artifacts (in years), which are: `150000, 675000`?"
+      ]
+    }
+  ]
+}

@@ -26,3 +26,6 @@ benchmark/
 pred_results/
 logs/
 benchmarks/ScienceAgentBench-upstream/
+
+# DiscoveryWorld runtime artifacts
+video/

@@ -1,0 +1,102 @@
+{
+  "episode_id": "r2b_Combinatorial_Chemistry_Easy_NO_STRATEGY_s43",
+  "scenario": "Combinatorial Chemistry",
+  "difficulty": "Easy",
+  "seed": 43,
+  "arm": "NO_STRATEGY",
+  "agent_id": "SimplePolicyAgent",
+  "model": "rule-based-v1",
+  "status": "FAILED",
+  "steps_taken": 15,
+  "final_score": 0,
+  "max_score": 12,
+  "score_normalized": 0.0,
+  "n_decision_points": 14,
+  "elapsed_s": 4.894,
+  "n_observations": 0,
+  "n_actions": 0,
+  "scorecard": [
+    {
+      "taskName": "RustedKeyTaskEasy",
+      "taskDescription": "You were venturing into the wilderness of Planet X to a storage shed to fetch some supplies. The shed door locked behind you, and your key appears too rusted to work in the lock. You remember one of the other colonists mentioning that one of the chemicals in the shed is a rust remover, but unfortunately the chemicals you see are all unlabelled.You need to figure out which is a rust remover, and use it to remove the rust from the key.  Then, use the key to open the shed door, and make your way back to the colony. You have no means of communication with the other colonists, and must figure this out on your own. \nSome helpful notes: \n1. The rusted key is in the shed. \n2. The shed door is locked, and will only open using a non-rusted key. \n3. You can add chemicals to the jar. Just use a chemical dispenser on the jar to add chemicals to the jar. \n4. The solution is only a single chemical, and should not require mixing chemicals. If you add multiple chemicals into the same jar, they will automatically mix, having different properties than any single chemical. \n5. Placing the rusted key into the jar will automatically apply the chemical in that jar to the key.  If the chemical is correct, the rust will be removed, though it may up to 2 steps for this to happen. \n6. If you need to clean the jar of chemicals to try a new chemical, use the bottle washer on the jar. \n7. When you have successfully derusted the key and opened the door, please leave the shed. \n",
+      "score": 0,
+      "maxScore": 12,
+      "scoreNormalized": 0.0,
+      "completed": false,
+      "completedSuccessfully": false,
+      "scoreCard": [
+        {
+          "name": "Take key",
+          "description": "The key has been in an agent's inventory",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Take jar",
+          "description": "The mixing jar has been in an agent's inventory",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Use each chemical dispenser",
+          "description": "Each chemical dispenser has been used",
+          "maxScore": 4,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": "0 of 4 dispensers have been used"
+        },
+        {
+          "name": "Use bottle cleaner",
+          "description": "The bottle cleaner has been used",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Place key in jar",
+          "description": "The key has been placed in the jar at least once",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        },
+        {
+          "name": "Key is not rusted",
+          "description": "The key is not rusted (includes levels for reduced amounts of rust)",
+          "maxScore": 3,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [
+            33120
+          ],
+          "associatedNotes": "The key is partially rusted"
+        },
+        {
+          "name": "Agent is outside",
+          "description": "The agent is outside the shed",
+          "maxScore": 1,
+          "score": 0,
+          "completed": false,
+          "associatedUUIDs": [],
+          "associatedNotes": ""
+        }
+      ],
+      "criticalHypotheses": [
+        "If the key is placed in a mixture of pure Substance A, then the rust will be removed."
+      ],
+      "criticalQuestions": [
+        "Does it clearly state the rust remover compound is this compound: `Substance A`?"
+      ]
+    }
+  ]
+}
