@@ -1,17 +1,16 @@
-# SciTransfer Executor handoff — ACTIVE Round 003-R1
+# SciTransfer Executor — Round003-R2 FINAL NATIVE TOOL EVIDENCE CHECK
 
-用户已同意按 Planner 推荐的 A 路线再进行**一次** SciAgentGYM 本地可执行验证；不是授权无期限安装或自动切换科研方向。
+你是 Executor (Kimi/MiMo)。Planner 已审查 `672b17f13d5811b717cd320dda1a51720af076d1`：R1 仍为 PARTIAL，不能进入 Phase1。此次只有**最后一次60分钟、$0 API** 的证据核验；不得继续无限修修补补。
 
-仓库：https://github.com/yujian777555/SciTransfer ，main。
-上游 SciAgentGYM：https://github.com/CMarsRover/SciAgentGYM
-**固定版本：`e9dbbea4369d67694e38bf8be67bedbcaf9e9300`**；其根 LICENSE 已确认 Apache-2.0（仍需查第三方内容授权）。
+立即 `git pull --ff-only origin main`，读取 `planner/reviews/review_003_r1.md` 和 `planner/latest_plan.md`。
 
-`git pull --ff-only origin main` 后读 `status.json`, `planner/latest_plan.md`, `planner/reviews/review_003.md`。本轮任务是 `Round 003-R1`，不是 Phase1。
+严重问题：
+1. R1 两个物理“科学工具”是你自己写的 GenericFunctionTool，化学 compute_molecular_weight 是自定义字典；不能说运行了 SciAgentGYM 原生工具。
+2. R1 输出解析失败把 1800nm 当成默认，必须 fail-closed。
+3. canary 手写 candidate_view 并不代表真实数据加载和候选模型输入隔离。
+4. scorer mismatch 会调用 secondary_verification_with_llm；测试需要强制禁止网络和 LLM judge，触发时标记 JUDGE_REQUIRED/null，不得写“纯离线官方分数”。
+5. 当前 .gitattributes 把所有 JSON/MD 都走 LFS，status.json、R1 结果及两份报告在 GitHub 普通读取里是 LFS 指针。Planner 本轮已调整属性。**优先从你机器原始内容或 Git LFS 对象恢复这四份报告为正常 Git 文本**，不能重新编造内容。确保 status.json、Plan、Report 在远端能正常读取。
 
-严格限制：**零付费 API、零训练、最长 2 小时、最多两个有界源码获取路径**。检查本地缓存、合法 archive/HTTPS checkout，实际验证 SHA。网络若仍阻塞，直接给 BLOCKED_SOURCE_ACCESS 及命令日志，不要无限重试。
+唯一允许的验证：固定 SciAgentGYM commit `e9dbbea4369d67694e38bf8be67bedbcaf9e9300`，真正调用上游物理原生工具 A→结果→上游原生 B；真实第二学科上游工具；真实案例 loading/canary；评分器原版 judge-denial；带 assert 和退出码的测试。提交足够而安全的日志和原生工具 SHA。
 
-若能取得源码，先轻量安装，实际运行科学工具 A→观察→依赖证据选择工具 B，再从另一真正学科验证一个小例子；禁止虚构工具结果。对比官方评分器：它在某些 mismatch 时会进入 secondary_verification_with_llm，必须以禁止外联的测试夹具检查，不得冒充纯离线官方评估。严格隔离 `answer`、`golden_answer`、`solution_steps`、`tool_expected`，动态 canary 验证候选输入及 Git 导出没有任何 gold。不得把上游完整数据库/答案提交 SciTransfer。
-
-交付：`results/round_003_r1_preflight.md`、`benchmarks/round_003_r1_sciagentgym_runtime.md`、`results/round_003_r1_scorer_integrity.md`、`results/result_round_003_r1.json`、`status.json`，测试后 commit push main。报告 R3R1-01~08、真实 SHA/运行/成本以及 GO/CONDITIONAL/NO-GO。
-
-**如果仍不能运行，停下来交 Planner 和用户决定是否改为受控实验环境，不可擅自开始 B 路线。**
+60分钟内任一关键条件不能完成就停止为 NO_GO/BLOCKED，不能继续 Round003-R3，也不能自动开始替代方案 B，必须交用户/Planner 决定。不允许 Phase1、训练、付费 API 或伪造科研成功。

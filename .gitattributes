@@ -1,2 +1,4 @@
-*.json filter=lfs diff=lfs merge=lfs -text
-*.md filter=lfs diff=lfs merge=lfs -text
+# Keep scientific reports and machine-readable state as ordinary Git blobs.
+# Disable Git LFS filters for text records (including status.json).
+*.json text -filter
+*.md text -filter
