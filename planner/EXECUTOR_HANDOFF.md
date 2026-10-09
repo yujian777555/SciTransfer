@@ -1,16 +1,12 @@
-# SciTransfer Executor — Round003-R2 FINAL NATIVE TOOL EVIDENCE CHECK
+# SciTransfer Executor handoff — R3-R2 CLOSED, AWAIT USER
 
-你是 Executor (Kimi/MiMo)。Planner 已审查 `672b17f13d5811b717cd320dda1a51720af076d1`：R1 仍为 PARTIAL，不能进入 Phase1。此次只有**最后一次60分钟、$0 API** 的证据核验；不得继续无限修修补补。
+Planner 已核验远端最新 HEAD `e7bd4edfea84d88b60bc28feda0dafd94f6de8f2`。Git LFS 交接修复成功；原生上游物理函数与化学类已发现，后续化学新增 `r3r2_chem_compute.py` 通过 `MinimalSciEnv.step()` 实际尝试计算，但没有 assert + 可审核输出日志。两步物理函数没有真正传递第一次计算结果作为第二次调用参数；不存在已经证实的证据依赖决策。Canary 只在合成数据执行；官方评分 mismatch 触发 LLM judge。
 
-立即 `git pull --ff-only origin main`，读取 `planner/reviews/review_003_r1.md` 和 `planner/latest_plan.md`。
+Planner 最终判定：R3-R2 PARTIAL / 科研实验验收不通过，`status.json=BLOCKED`。**不得再自动修 SciAgentGYM、不得开展 Round004、不得训练 Phase1、不得用收费 API**。
 
-严重问题：
-1. R1 两个物理“科学工具”是你自己写的 GenericFunctionTool，化学 compute_molecular_weight 是自定义字典；不能说运行了 SciAgentGYM 原生工具。
-2. R1 输出解析失败把 1800nm 当成默认，必须 fail-closed。
-3. canary 手写 candidate_view 并不代表真实数据加载和候选模型输入隔离。
-4. scorer mismatch 会调用 secondary_verification_with_llm；测试需要强制禁止网络和 LLM judge，触发时标记 JUDGE_REQUIRED/null，不得写“纯离线官方分数”。
-5. 当前 .gitattributes 把所有 JSON/MD 都走 LFS，status.json、R1 结果及两份报告在 GitHub 普通读取里是 LFS 指针。Planner 本轮已调整属性。**优先从你机器原始内容或 Git LFS 对象恢复这四份报告为正常 Git 文本**，不能重新编造内容。确保 status.json、Plan、Report 在远端能正常读取。
+现在阅读 `planner/reviews/review_003_r2.md` 和 `planner/hold_after_round_003_r2.md`，等用户决定：
+- B: 经用户明确许可，Planner 重设计确定性外部评分的受控跨学科科学过程环境；
+- A: 用户另行提供经过独立确认的原生 benchmark tool/scorer、干净 loader 和评分环境；
+- C: 暂停。
 
-唯一允许的验证：固定 SciAgentGYM commit `e9dbbea4369d67694e38bf8be67bedbcaf9e9300`，真正调用上游物理原生工具 A→结果→上游原生 B；真实第二学科上游工具；真实案例 loading/canary；评分器原版 judge-denial；带 assert 和退出码的测试。提交足够而安全的日志和原生工具 SHA。
-
-60分钟内任一关键条件不能完成就停止为 NO_GO/BLOCKED，不能继续 Round003-R3，也不能自动开始替代方案 B，必须交用户/Planner 决定。不允许 Phase1、训练、付费 API 或伪造科研成功。
+旧分数和数据必须原样保留，不准私自宣布跨领域科研策略已经有效。
