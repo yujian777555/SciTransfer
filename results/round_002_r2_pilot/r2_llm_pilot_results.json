@@ -1,0 +1,50 @@
+{
+  "model": "deepseek-v4-pro",
+  "total_cost_usd": 0.073729,
+  "episodes": [
+    {
+      "scenario": "Combinatorial Chemistry",
+      "seed": 200,
+      "arm": "NO_STRATEGY",
+      "initial_score": 0,
+      "final_score": 0,
+      "score_delta": 0,
+      "max_score": 12,
+      "n_valid_actions": 4,
+      "n_invalid_actions": 6
+    },
+    {
+      "scenario": "Combinatorial Chemistry",
+      "seed": 200,
+      "arm": "FIXED_CONDITIONAL_STRATEGY",
+      "initial_score": 0,
+      "final_score": 0,
+      "score_delta": 0,
+      "max_score": 12,
+      "n_valid_actions": 4,
+      "n_invalid_actions": 6
+    },
+    {
+      "scenario": "Archaeology Dating",
+      "seed": 200,
+      "arm": "NO_STRATEGY",
+      "initial_score": 0,
+      "final_score": 0,
+      "score_delta": 0,
+      "max_score": 6,
+      "n_valid_actions": 1,
+      "n_invalid_actions": 9
+    },
+    {
+      "scenario": "Archaeology Dating",
+      "seed": 200,
+      "arm": "FIXED_CONDITIONAL_STRATEGY",
+      "initial_score": 0,
+      "final_score": 0,
+      "score_delta": 0,
+      "max_score": 6,
+      "n_valid_actions": 1,
+      "n_invalid_actions": 9
+    }
+  ]
+}

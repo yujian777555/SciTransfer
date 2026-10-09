@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "round": 2,
+  "round_label": "002_r2",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "R2 secure LLM micro-pilot completed. G0/G1/G2 offline gates PASS. 4 DeepSeek episodes run (2 scenarios x 2 arms) at $0.074 cost. All score deltas zero. NO-GO for strategy transfer at current budget. DiscoveryWorld suitable for multi-step decisions but LLM agent needs better prompting/more steps.",
+  "source_commit": null,
+  "environment": {
+    "model": "deepseek-v4-pro",
+    "provider": "DeepSeek (https://api.deepseek.com/v1)",
+    "os": "Windows 10/11",
+    "pre_registration": "experiments/round_002_r2_preregistration.json",
+    "quarantined_seeds": [42, 43, 100]
+  },
+  "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "COMPLETE"
+  },
+  "episodes": {
+    "n_total": 4,
+    "total_cost_usd": 0.074,
+    "budget_usd": 1.0,
+    "results": [
+      {"scenario": "Combinatorial Chemistry", "arm": "NO_STRATEGY", "initial": 0, "final": 0, "delta": 0, "valid": 4, "invalid": 6},
+      {"scenario": "Combinatorial Chemistry", "arm": "FIXED_CONDITIONAL_STRATEGY", "initial": 0, "final": 0, "delta": 0, "valid": 4, "invalid": 6},
+      {"scenario": "Archaeology Dating", "arm": "NO_STRATEGY", "initial": 0, "final": 0, "delta": 0, "valid": 1, "invalid": 9},
+      {"scenario": "Archaeology Dating", "arm": "FIXED_CONDITIONAL_STRATEGY", "initial": 0, "final": 0, "delta": 0, "valid": 1, "invalid": 9}
+    ]
+  },
+  "tests": {
+    "command": "python -m pytest tests/ -q -ra",
+    "passed": 114,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "114 tests: 10 G0 isolation/canary, 22 R2R1 adapter, 13 R2B adapter, 14 R3 scoring, 12 R2 downloader, 19 R1 evaluator, 24 safeguards"
+  },
+  "acceptance": {
+    "R2R2-01": "PASS",
+    "R2R2-02": "PASS",
+    "R2R2-03": "PASS",
+    "R2R2-04": "PASS",
+    "R2R2-05": "PASS",
+    "R2R2-06": "PASS",
+    "R2R2-07": "PASS",
+    "R2R2-08": "NOT_EVALUATED"
+  },
+  "acceptance_detail": {
+    "R2R2-01": "No hidden data in model input. Canary tests pass. Old seeds quarantined. Trusted files untracked.",
+    "R2R2-02": "Official action schema working. Real PICKUP scientific action demonstrated. Feedback-dependent decisions shown.",
+    "R2R2-03": "Same LLM agent for both arms. Pre-registration frozen. Only strategy text differs.",
+    "R2R2-04": "114/114 tests pass. No silent skips.",
+    "R2R2-05": "4 matched LLM episodes completed with real scores (all zero) and replayable traces.",
+    "R2R2-06": "Spend $0.074 <= $1.0. DeepSeek key configured locally. No secrets in repo.",
+    "R2R2-07": "Hand-authored exploratory pilot. No learned transfer claimed. No unsupported statistics.",
+    "R2R2-08": "This commit + push. status=AWAITING_PLANNER_REVIEW."
+  },
+  "decision": "NO_GO_STRATEGY_TRANSFER",
+  "decision_rationale": "Uniform zero score deltas across 4 episodes. No substantive scientific interaction by LLM agent. Movement actions dominate. Task complexity exceeds single-shot LLM capability at current budget.",
+  "blockers": [],
+  "artifacts": [
+    "results/round_002_r1_erratum.md",
+    "results/round_002_r2_preflight.md",
+    "results/round_002_r2_decision.md",
+    "results/round_002_r2_pilot/r2_llm_pilot_results.json",
+    "experiments/round_002_r2_preregistration.json",
+    "src/scitransfer/secure_input.py",
+    "tests/test_r2_g0_isolation.py"
+  ],
+  "limitations": [
+    "All score deltas zero — no meaningful outcome variation",
+    "Low valid action rate (4-10 per episode)",
+    "Movement-heavy actions, not scientific interactions",
+    "Single-shot LLM calls (no self-debug or iteration)",
+    "Only 2 scenarios tested"
+  ]
+}

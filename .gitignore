@@ -29,3 +29,9 @@ benchmarks/ScienceAgentBench-upstream/
 
 # DiscoveryWorld runtime artifacts
 video/
+
+# Privileged evaluator data (NEVER track)
+*_trusted.json
+*trusted*.json
+criticalHypotheses*
+criticalQuestions*

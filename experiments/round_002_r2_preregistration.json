@@ -1,0 +1,64 @@
+{
+  "registration_id": "round_002_r2_prereg",
+  "timestamp_utc": "2026-10-09T22:00:00Z",
+  "phase": "PHASE0B",
+  "round": "002_R2",
+  "note": "Pre-registered BEFORE any LLM target evaluations. Seeds NOT in {42, 43, 100}.",
+  "model": {
+    "provider": "DeepSeek",
+    "model": "deepseek-v4-pro",
+    "endpoint": "https://api.deepseek.com/v1",
+    "temperature": 0.0,
+    "max_tokens_per_call": 2048
+  },
+  "budget": {
+    "max_total_api_cost_usd": 1.0,
+    "max_scored_episodes": 4,
+    "max_steps_per_episode": 15,
+    "max_seconds_per_episode": 120
+  },
+  "scenarios": [
+    {
+      "name": "Combinatorial Chemistry",
+      "difficulty": "Easy",
+      "seed": 200,
+      "rationale": "Chemistry domain; verified scientific actions possible (PICKUP key)"
+    },
+    {
+      "name": "Archaeology Dating",
+      "difficulty": "Easy",
+      "seed": 200,
+      "rationale": "Archaeology domain; distinct from chemistry"
+    }
+  ],
+  "arms": {
+    "NO_STRATEGY": {
+      "description": "Baseline: task description + observation only",
+      "strategy_text": null
+    },
+    "FIXED_CONDITIONAL_STRATEGY": {
+      "description": "Treatment: same as baseline plus preregistered strategy instruction",
+      "strategy_id": "baseline_first_validation_v1",
+      "strategy_text": "Before writing the full solution, first write a minimal baseline that only loads the data and saves a trivial but correctly formatted output at the required path. Then iterate: add one analysis step at a time and re-run to verify each step produces a valid intermediate result before adding the next. Prefer the cheapest discriminating check over a complex pipeline.",
+      "strategy_hash": "ed2cb52cf9f14e2d5dd3bfdaf7e6054a8138261992029aaa07337b6bf96bed1f"
+    }
+  },
+  "arm_order": "Randomize per episode to avoid order effects",
+  "shared_config": {
+    "agent_implementation": "LLMAgent (identical for both arms)",
+    "action_schema": "Official DiscoveryWorld ActionType (MOVE_DIRECTION, PICKUP, USE, etc.)",
+    "budget_per_episode": {"max_steps": 15, "max_seconds": 120, "max_tokens": 2048},
+    "observation_format": "build_model_input() whitelist (no hidden fields)"
+  },
+  "stopping_rules": [
+    "Stop immediately if canary leakage detected",
+    "Stop if API cost exceeds $1",
+    "Stop if more than 4 scored episodes completed",
+    "Stop if any episode produces invalid API schema"
+  ],
+  "exclusions": {
+    "quarantined_seeds": [42, 43, 100],
+    "quarantined_scenarios": ["Reactor Lab seed 42"],
+    "reason": "Hidden evaluator information exposed in historical Git"
+  }
+}
