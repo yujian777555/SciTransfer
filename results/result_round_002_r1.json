@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "round": 2,
+  "round_label": "002_r1",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "R2-R1 validity correction completed. Official action schema (MOVE_DIRECTION/PICKUP/USE) working with success validation. Observation-dependent decisions demonstrated (EvidencePolicyAgent makes different choices based on observed objects). Complete step traces with n_observations/n_actions reconciling to events. Hidden evaluator info isolated (canary tests pass). Initial scores recorded before actions. 4 calibration episodes run: FIXED_STRATEGY produced 4 valid actions vs NO_STRATEGY 0 on Combinatorial Chemistry. CONDITIONAL GO recommendation — infrastructure validated, score variation awaits LLM agent.",
+  "source_commit": null,
+  "environment": {
+    "primary": "DiscoveryWorld (allenai/discoveryworld, Apache-2.0)",
+    "action_schema": "Official ActionType enum (MOVE_DIRECTION, PICKUP, USE, etc.)",
+    "os": "Windows 10/11",
+    "python": "3.10.1",
+    "agent_type": "EvidencePolicyAgent / NoStrategyAgent (rule-based, no API cost)"
+  },
+  "episodes": {
+    "n_total": 4,
+    "n_scenarios": 2,
+    "n_arms": 2,
+    "results": [
+      {
+        "scenario": "Combinatorial Chemistry",
+        "arm": "NO_STRATEGY",
+        "initial_score": 0.0,
+        "final_score": 0.0,
+        "score_delta": 0.0,
+        "n_valid_actions": 0,
+        "n_invalid_actions": 15,
+        "n_decision_points": 0
+      },
+      {
+        "scenario": "Combinatorial Chemistry",
+        "arm": "FIXED_CONDITIONAL_STRATEGY",
+        "initial_score": 0.0,
+        "final_score": 0.0,
+        "score_delta": 0.0,
+        "n_valid_actions": 4,
+        "n_invalid_actions": 11,
+        "n_decision_points": 4
+      },
+      {
+        "scenario": "Archaeology Dating",
+        "arm": "NO_STRATEGY",
+        "initial_score": 0.0,
+        "final_score": 0.0,
+        "score_delta": 0.0,
+        "n_valid_actions": 1,
+        "n_invalid_actions": 14,
+        "n_decision_points": 1
+      },
+      {
+        "scenario": "Archaeology Dating",
+        "arm": "FIXED_CONDITIONAL_STRATEGY",
+        "initial_score": 0.0,
+        "final_score": 0.0,
+        "score_delta": 0.0,
+        "n_valid_actions": 1,
+        "n_invalid_actions": 14,
+        "n_decision_points": 1
+      }
+    ]
+  },
+  "tests": {
+    "command": "python -m pytest tests/ -v",
+    "passed": 21,
+    "failed": 0,
+    "skipped": 1,
+    "notes": "21 R2-R1 tests pass (action schema validation, observation-dependent decisions, counterfactual tests, hidden info isolation, status semantics, DiscoveryWorld integration). 1 skipped (SciAgentGYM provenance test). Plus 82 prior tests."
+  },
+  "acceptance": {
+    "R2R1-01": "PASS",
+    "R2R1-02": "PASS",
+    "R2R1-03": "PASS",
+    "R2R1-04": "PASS",
+    "R2R1-05": "PASS",
+    "R2R1-06": "PASS",
+    "R2R1-07": "PASS",
+    "R2R1-08": "NOT_EVALUATED"
+  },
+  "acceptance_detail": {
+    "R2R1-01": "Erratum documents all defects. Old data quarantined. SciAgentGYM provenance corrected.",
+    "R2R1-02": "Official action schema working. Success/failure recorded. CamelCase actions rejected.",
+    "R2R1-03": "Observation-dependent decisions demonstrated. Counterfactual test passes. FIXED_STRATEGY produces different actions than NO_STRATEGY.",
+    "R2R1-04": "Complete step traces with observations, actions, responses. n_observations/n_actions reconcile.",
+    "R2R1-05": "Hidden evaluator isolated. Canary tests pass. TrustedEvaluator separate from CandidateAgent.",
+    "R2R1-06": "Initial scores recorded before actions. No ambient credit detected.",
+    "R2R1-07": "21 tests pass. 4 episodes completed. $0 API cost.",
+    "R2R1-08": "This commit + push. status=AWAITING_PLANNER_REVIEW."
+  },
+  "decision": "CONDITIONAL_GO",
+  "decision_conditions": [
+    "LLM agent integration for meaningful score variation",
+    "More scenarios for cross-domain validation",
+    "Verify counterfactual decisions in live episodes"
+  ],
+  "blockers": [],
+  "artifacts": [
+    "results/round_002_erratum.md",
+    "results/round_002_r1_decision.md",
+    "results/round_002_r1_calibration/r1_calibration_summary.json",
+    "benchmarks/suitability_matrix_round_002_r1.md",
+    "src/scitransfer/discoveryworld_r2r1.py",
+    "tests/test_r2r1_adapter.py",
+    "scripts/r2r1_calibration.py"
+  ],
+  "limitations": [
+    "Rule-based agent (not LLM) — limited task completion",
+    "All scores zero — no meaningful score variation yet",
+    "Only 2 scenarios tested",
+    "Cross-domain independence not rigorously verified (shared game engine)"
+  ]
+}

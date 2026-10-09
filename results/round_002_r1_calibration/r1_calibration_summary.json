@@ -1,0 +1,66 @@
+{
+  "round": "002_r1_calibration",
+  "environment": "DiscoveryWorld",
+  "agent_type": "rule-based EvidencePolicyAgent (no API cost)",
+  "n_episodes": 4,
+  "total_elapsed_s": 50.9,
+  "episodes": [
+    {
+      "episode_id": "r2r1_Combinatorial_Chemistry_Easy_NO_STRATEGY_s100",
+      "scenario": "Combinatorial Chemistry",
+      "arm": "NO_STRATEGY",
+      "status": "FAILED",
+      "initial_score": 0.0,
+      "final_score": 0.0,
+      "score_delta": 0.0,
+      "n_valid_actions": 0,
+      "n_invalid_actions": 15,
+      "n_decision_points": 0,
+      "n_events": 15
+    },
+    {
+      "episode_id": "r2r1_Combinatorial_Chemistry_Easy_FIXED_CONDITIONAL_STRATEGY_s100",
+      "scenario": "Combinatorial Chemistry",
+      "arm": "FIXED_CONDITIONAL_STRATEGY",
+      "status": "FAILED",
+      "initial_score": 0.0,
+      "final_score": 0.0,
+      "score_delta": 0.0,
+      "n_valid_actions": 4,
+      "n_invalid_actions": 11,
+      "n_decision_points": 4,
+      "n_events": 15
+    },
+    {
+      "episode_id": "r2r1_Archaeology_Dating_Easy_NO_STRATEGY_s100",
+      "scenario": "Archaeology Dating",
+      "arm": "NO_STRATEGY",
+      "status": "FAILED",
+      "initial_score": 0.0,
+      "final_score": 0.0,
+      "score_delta": 0.0,
+      "n_valid_actions": 1,
+      "n_invalid_actions": 14,
+      "n_decision_points": 1,
+      "n_events": 15
+    },
+    {
+      "episode_id": "r2r1_Archaeology_Dating_Easy_FIXED_CONDITIONAL_STRATEGY_s100",
+      "scenario": "Archaeology Dating",
+      "arm": "FIXED_CONDITIONAL_STRATEGY",
+      "status": "FAILED",
+      "initial_score": 0.0,
+      "final_score": 0.0,
+      "score_delta": 0.0,
+      "n_valid_actions": 1,
+      "n_invalid_actions": 14,
+      "n_decision_points": 1,
+      "n_events": 15
+    }
+  ],
+  "score_variation": {
+    "min_delta": 0.0,
+    "max_delta": 0.0,
+    "has_variation": false
+  }
+}
