@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "round": 4,
+  "round_label": "004_design",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "Phase 0-D research design COMPLETE. Method draft, novelty matrix, experiment matrix, engineering spec, and design decision produced. CONDITIONAL GO for controlled simulator-based strategy transfer research. Zero implementation, zero API cost, zero training.",
+  "source_commit": null,
+  "design_gates": {
+    "DESIGN-01": "PASS",
+    "DESIGN-02": "PASS",
+    "DESIGN-03": "PASS",
+    "DESIGN-04": "PASS",
+    "DESIGN-05": "PARTIAL",
+    "DESIGN-06": "PASS"
+  },
+  "design_gates_detail": {
+    "DESIGN-01": "Three mechanisms genuinely different (statistical testing, optimization, spatial interpolation). Anti-toy controls specified.",
+    "DESIGN-02": "Neutral evaluator in separate process. No reward branching on strategy ID.",
+    "DESIGN-03": "Source-only extraction interface specified. Strategy schema typed. No target gold access.",
+    "DESIGN-04": "Independent prereg commit, paired budgets, floor checks, uncertainty plan specified.",
+    "DESIGN-05": "Direct collisions documented. Narrow contribution claims C1/C2/C3. Unverified works flagged.",
+    "DESIGN-06": "~2000 LOC, 2-3 days, $0 CPU. Process isolation and RNG plan defined."
+  },
+  "deliverables": [
+    "research/round_004_method_draft.md",
+    "research/round_004_novelty_matrix.md",
+    "research/round_004_experiment_matrix.md",
+    "engineering/round_004_design_spec.md",
+    "research/round_004_design_decision.md"
+  ],
+  "decision": "CONDITIONAL_GO",
+  "decision_rationale": "Design is technically sound with genuine mechanism diversity. Novelty contribution is narrow but defensible. CONDITIONAL on full related work audit and independent DGP review before implementation.",
+  "tests": {
+    "command": "N/A (design only)",
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "note": "Design round only. No code implementation or testing."
+  },
+  "blockers": [],
+  "limitations": [
+    "Robin, AI Scientist, PrimeScientist etc. not fully audited",
+    "DGP independence needs independent reviewer confirmation",
+    "External validity bridge not established",
+    "Zero experimental results (design only)"
+  ]
+}
