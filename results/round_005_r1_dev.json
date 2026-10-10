@@ -1,0 +1,74 @@
+[
+  {
+    "task": "dev_m1_a",
+    "mechanism": "M1",
+    "policy": "naive",
+    "fdp": 0.8,
+    "power": 0.08,
+    "cost": 7,
+    "utility": -0.10285714285714287
+  },
+  {
+    "task": "dev_m1_a",
+    "mechanism": "M1",
+    "policy": "feedback",
+    "fdp": 0.875,
+    "power": 0.04,
+    "cost": 11,
+    "utility": -0.07590909090909091
+  },
+  {
+    "task": "dev_m1_b",
+    "mechanism": "M1",
+    "policy": "naive",
+    "fdp": 1.0,
+    "power": 0.0,
+    "cost": 7,
+    "utility": -0.14285714285714285
+  },
+  {
+    "task": "dev_m1_b",
+    "mechanism": "M1",
+    "policy": "feedback",
+    "fdp": 1.0,
+    "power": 0.0,
+    "cost": 11,
+    "utility": -0.09090909090909091
+  },
+  {
+    "task": "dev_m2_a",
+    "mechanism": "M2",
+    "policy": "naive",
+    "fdp": 0.7,
+    "power": 0.13043478260869565,
+    "cost": 7,
+    "utility": -0.08136645962732918
+  },
+  {
+    "task": "dev_m2_a",
+    "mechanism": "M2",
+    "policy": "feedback",
+    "fdp": 0.625,
+    "power": 0.13043478260869565,
+    "cost": 11,
+    "utility": -0.04496047430830039
+  },
+  {
+    "task": "dev_m2_b",
+    "mechanism": "M2",
+    "policy": "naive",
+    "fdp": 0.6,
+    "power": 0.16,
+    "cost": 7,
+    "utility": -0.06285714285714285
+  },
+  {
+    "task": "dev_m2_b",
+    "mechanism": "M2",
+    "policy": "feedback",
+    "fdp": 0.75,
+    "power": 0.08,
+    "cost": 11,
+    "utility": -0.06090909090909091
+  }
+]

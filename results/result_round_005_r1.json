@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "round": 5,
+  "round_label": "005_r1",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "D1 measurement integrity remediation COMPLETE. Corrective spec frozen. Real sequential actions (ALLOCATE_REPLICATE, MEASURE_QC, FIT_MODEL, COMMIT_HITS). Server-side cost enforcement. Regret-based neutral utility. 19/19 new tests + 133 total pass. DEV smoke shows non-degenerate FDP 0.60-1.00. CONDITIONAL GO.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "D1 Simulator (corrected)",
+    "upstream_ref": "corrective-v1",
+    "official_evaluator_verified": true,
+    "os": "Windows NT 10.0.26200.0",
+    "python": "3.10.1",
+    "spec_commit": "4962159 (frozen before implementation)"
+  },
+  "runs": [],
+  "runs_note": "DEV smoke only. See results/round_005_r1_dev.json",
+  "dev_results": {
+    "n_tasks": 4,
+    "n_policies": 2,
+    "n_episodes": 8,
+    "score_variation": {
+      "fdp_range": [0.600, 1.000],
+      "power_range": [0.0, 0.160],
+      "non_trivial": true
+    }
+  },
+  "tests": {
+    "command": "python -m pytest tests/ -q -ra",
+    "passed": 133,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "19 R5R1 integrity tests + 114 prior tests"
+  },
+  "acceptance": {
+    "AC-01": "PASS",
+    "AC-02": "PASS",
+    "AC-03": "PASS",
+    "AC-04": "PASS",
+    "AC-05": "PASS",
+    "AC-06": "PASS"
+  },
+  "acceptance_detail": {
+    "AC-01": "Corrective spec frozen (4962159) before implementation.",
+    "AC-02": "Real sequential actions with server-side cost. No inert tools.",
+    "AC-03": "Public view excludes hidden truth. Strategy-identity invariance verified.",
+    "AC-04": "Set semantics for duplicates. Empty utility=0. All-null handled.",
+    "AC-05": "Observation-dependent decisions. Non-degenerate DEV scores.",
+    "AC-06": "133/133 tests pass. Schema-compliant result. $0 API."
+  },
+  "decision": "CONDITIONAL_GO",
+  "decision_rationale": "D1 measurement integrity verified. Real actions, correct scoring, non-degenerate scores. CONDITIONAL on OS process isolation upgrade.",
+  "blockers": [],
+  "artifacts": [
+    "research/round_005_r1_d1_corrective_spec.md",
+    "src/scitransfer/simulator/dgp/bio_expression.py",
+    "src/scitransfer/simulator/engine.py",
+    "src/scitransfer/simulator/evaluator.py",
+    "results/round_005_r1_dev.json",
+    "tests/test_d1_r1_integrity.py"
+  ],
+  "limitations": [
+    "Function-level isolation (not OS process isolation)",
+    "Simple reference policies",
+    "4 DEV tasks only"
+  ]
+}

@@ -1,0 +1,6 @@
+content = open('scripts/r5_dev_smoke.py', encoding='utf-8').read()
+content = content.replace('from scitransfer.simulator.evaluator import score_submission, compute_utility', 'from scitransfer.simulator.evaluator import score_submission')
+content = content.replace('utility = compute_utility(score)', 'utility = score.utility')
+content = content.replace(', cost=1)', ')').replace(', cost=2)', ')').replace(', cost=0)', ')')
+open('scripts/r5_dev_smoke.py', 'w', encoding='utf-8').write(content)
+print('Fixed')

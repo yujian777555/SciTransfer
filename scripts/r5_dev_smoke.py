@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from scitransfer.simulator.dgp.bio_expression import D1TaskConfig
-from scitransfer.simulator.evaluator import score_submission, compute_utility
+from scitransfer.simulator.evaluator import score_submission
 from scitransfer.simulator.engine import ExperimentEngine, Action
 
 print("=== R5 G2: DEV Task Calibration Smoke ===\n")
@@ -25,7 +25,7 @@ def naive_policy(obs, step, budget_left):
     """Naive fixed-allocation: commit top genes by fold change."""
     fc = obs.gene_means_treatment / (obs.gene_means_control + 1e-6)
     top_genes = np.argsort(fc)[-20:].tolist()
-    return Action("COMMIT_HITS", {"gene_list": top_genes}, cost=0)
+    return Action("COMMIT_HITS", {"gene_list": top_genes})
 
 def feedback_policy(obs, step, budget_left):
     """Feedback-conditioned: allocate more reps if variance is high."""
@@ -33,15 +33,15 @@ def feedback_policy(obs, step, budget_left):
     
     if step < 3 and budget_left > 5:
         # Allocate more replicates
-        return Action("ALLOCATE_REPLICATE", {"n_reps": 2, "group": "control"}, cost=2)
+        return Action("ALLOCATE_REPLICATE", {"n_reps": 2, "group": "control"})
     elif step < 5 and budget_left > 3:
         # Measure QC
-        return Action("MEASURE_QC", {"gene_subset": list(range(20))}, cost=1)
+        return Action("MEASURE_QC", {"gene_subset": list(range(20))})
     else:
         # Commit
         fc = obs.gene_means_treatment / (obs.gene_means_control + 1e-6)
         top_genes = np.argsort(fc)[-15:].tolist()
-        return Action("COMMIT_HITS", {"gene_list": top_genes}, cost=0)
+        return Action("COMMIT_HITS", {"gene_list": top_genes})
 
 POLICIES = [
     ("naive_fixed", naive_policy),
@@ -91,7 +91,7 @@ for task_cfg in DEV_TASKS:
                 engine.truth.true_non_null,
                 engine.total_cost,
             )
-            utility = compute_utility(score)
+            utility = score.utility
             
             print(f"  FDP: {score.fdp:.3f}, Power: {score.power:.3f}, Cost: {score.sample_cost}")
             print(f"  Utility: {utility:.3f}")
