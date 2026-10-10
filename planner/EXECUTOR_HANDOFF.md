@@ -1,17 +1,16 @@
-# SciTransfer Executor handoff — Round 005: D1 CPU MEASUREMENT MVP ONLY
+# SciTransfer Executor handoff — Round005-R1 D1 scientific measurement FIX, LAST D1 GATE
 
-Planner 已审查 Round004 commit `304d6a49254c6dded165dfc3f8eb2267d02382a0`。结论：**设计阶段 CONDITIONAL ACCEPTED**，但三学科独立性、评分器公平、策略学习与创新性都还没被实测。现在只允许 **Round005 D1（生物信息学差异表达）CPU 最小原型**，不允许 Phase1、D2/D3 大规模实现、付费 API 或 GPU/模型训练。
+Planner 审查 Round005 `c9b0d7030eb53339479174c26046487b2981a81d` 的源文件和8条DEV成绩后发现：独立规范先提交确实成功；但是 D1 engine 中分配重复/QC/加对照/拟合动作均不改变数据；反馈策略按 step 决定动作且计算高方差量后从未用于决策；Action.cost 可由调用者伪造/写负数；空报告 utility=0.4（8条 DEV 中高于6条）；同进程 engine.truth 直接可访问，所谓独立评分没有 OS 边界；M1 应常数 phi 代码却始终随机；重复提交 gene IDs 扭曲 FDP；结果 JSON 不满足 schemas/result_round.schema.json。
 
-先 git pull --ff-only，读：
-1. `status.json`
-2. `planner/reviews/review_004.md`
-3. `planner/latest_plan.md`
-4. `planner/PROJECT_CHARTER.md`
-5. `research/phase0d_method_proposal.md`
+**R5-01 PASS，R5-02/04/06 PARTIAL，R5-03/05 FAIL。测量有效性没有验收。**
 
-R5 Step 0：**先写清楚 NB DGP、批次/处理设计可识别性、动作-观测-结果和 raw FDP/power/cost 评分定义，必须先单独 commit 冻结规范。**
-R5 Step 1：才实现 D1 engine + trusted isolated evaluator + real candidate loader (not fake canary), 最多 2 机制，无外部数据。
-R5 Step 2：无 LLM，>=4 DEV instances 和 2 个同预算盲参考规则策略，检测评分是否非地板、策略 ID 是否不影响分数，真实证据改变下一动作。
-R5 Step 3：assert-based security/scoring/replay tests、准确 pytest logs、schema 合规结果 `results/result_round_005.json`、分开的 safe DEV traces，状态更新、push main。
+只允许一次 CPU/$0 Round005-R1 核心修复。拉取 main 并读 `planner/reviews/review_005.md`、`planner/latest_plan.md` 和 `status.json`。
 
-不得把手写规则叫 source-learned scientific strategy，也不得称模拟评分等于真实科研 Benchmark。不得改旧实验、不得自动进入 Phase1，任何硬条件失败必须 BLOCKED/NO-GO。
+1. 新规范 `research/round_005_r1_d1_corrective_spec.md` + 独立评审，**先单独 commit**，旧结果原封不动。
+2. 真正实现有后果的重复测量、QC信息与预算，删除或实现其他无作用动作，独立 OS/文件权限可信评分，真正候选加载路径 canary。绝不能自制奖励“迁移策略好”。
+3. 服务端定价、唯一合法 gene IDs、空报告中立、公平随机/批次调整；验证 M1/M2 φ 数学一致性。
+4. 断言式测试，同一决策状态下改变合法 QC 观察，下一动作实际不同；≥4DEV task×2参考规则，说明分数和成本的真实来源。没有源域策略训练。
+5. 完整测试原始命令+退出码；结果 `results/result_round_005_r1.json` 用旧 schema **AC-01..06** 合规（DEV runs=[]），门报告另写。最终更新 status+push。
+6. 若真实动作/可信隔离/评分任一硬门失败，直接 `NO_GO_D1_MVP` 停止，不允许无限维修、D2/D3、Phase1、模型/付费API。
+
+请按 R5R1-01～06 汇报证据、SHA 和费用，由 Planner 复核。
