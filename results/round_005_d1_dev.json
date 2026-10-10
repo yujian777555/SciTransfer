@@ -1,0 +1,98 @@
+[
+  {
+    "task": "dev_m1_1",
+    "mechanism": "M1",
+    "policy": "naive_fixed",
+    "fdp": 0.35,
+    "power": 0.3939393939393939,
+    "cost": 0,
+    "utility": 0.4175757575757576,
+    "n_reported": 20,
+    "n_true_positives": 13,
+    "n_false_positives": 7
+  },
+  {
+    "task": "dev_m1_1",
+    "mechanism": "M1",
+    "policy": "feedback_conditioned",
+    "fdp": 0.26666666666666666,
+    "power": 0.3333333333333333,
+    "cost": 8,
+    "utility": 0.41066666666666674,
+    "n_reported": 15,
+    "n_true_positives": 11,
+    "n_false_positives": 4
+  },
+  {
+    "task": "dev_m1_2",
+    "mechanism": "M1",
+    "policy": "naive_fixed",
+    "fdp": 0.3,
+    "power": 0.2641509433962264,
+    "cost": 0,
+    "utility": 0.38566037735849057,
+    "n_reported": 20,
+    "n_true_positives": 14,
+    "n_false_positives": 6
+  },
+  {
+    "task": "dev_m1_2",
+    "mechanism": "M1",
+    "policy": "feedback_conditioned",
+    "fdp": 0.26666666666666666,
+    "power": 0.20754716981132076,
+    "cost": 8,
+    "utility": 0.3603522012578617,
+    "n_reported": 15,
+    "n_true_positives": 11,
+    "n_false_positives": 4
+  },
+  {
+    "task": "dev_m2_1",
+    "mechanism": "M2",
+    "policy": "naive_fixed",
+    "fdp": 0.45,
+    "power": 0.3055555555555556,
+    "cost": 0,
+    "utility": 0.34222222222222226,
+    "n_reported": 20,
+    "n_true_positives": 11,
+    "n_false_positives": 9
+  },
+  {
+    "task": "dev_m2_1",
+    "mechanism": "M2",
+    "policy": "feedback_conditioned",
+    "fdp": 0.4,
+    "power": 0.25,
+    "cost": 8,
+    "utility": 0.32399999999999995,
+    "n_reported": 15,
+    "n_true_positives": 9,
+    "n_false_positives": 6
+  },
+  {
+    "task": "dev_m2_2",
+    "mechanism": "M2",
+    "policy": "naive_fixed",
+    "fdp": 0.7,
+    "power": 0.20689655172413793,
+    "cost": 0,
+    "utility": 0.2027586206896552,
+    "n_reported": 20,
+    "n_true_positives": 6,
+    "n_false_positives": 14
+  },
+  {
+    "task": "dev_m2_2",
+    "mechanism": "M2",
+    "policy": "feedback_conditioned",
+    "fdp": 0.6666666666666666,
+    "power": 0.1724137931034483,
+    "cost": 8,
+    "utility": 0.18629885057471268,
+    "n_reported": 15,
+    "n_true_positives": 5,
+    "n_false_positives": 10
+  }
+]

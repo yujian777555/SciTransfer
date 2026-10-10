@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "round": 5,
+  "round_label": "005",
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "D1 CPU measurement prototype COMPLETE. Mathematical spec frozen before implementation. NegativeBinomial DGP with 2 mechanism variants. Sequential engine with 5 action types. Trusted evaluator with FDP/Power/Cost. 4 DEV tasks x 2 policies show non-degenerate score variation. 15/15 tests pass. CONDITIONAL GO.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "D1 Simulator (synthetic)",
+    "os": "Windows NT 10.0.26200.0",
+    "python": "3.10.1",
+    "mechanism_spec": "research/round_005_d1_mechanism_spec.md",
+    "spec_commit": "863391e (frozen before implementation)"
+  },
+  "runs": [],
+  "runs_note": "DEV smoke only, not official benchmark runs. See results/round_005_d1_dev.json",
+  "dev_results": {
+    "n_tasks": 4,
+    "n_policies": 2,
+    "n_episodes": 8,
+    "score_variation": {
+      "fdp_range": [0.267, 0.700],
+      "power_range": [0.172, 0.394],
+      "non_trivial": true
+    },
+    "mechanism_comparison": {
+      "M1_avg_fdp": 0.296,
+      "M2_avg_fdp": 0.554,
+      "observation": "M2 (confounded) has worse FDP than M1 (unconfounded)"
+    }
+  },
+  "tests": {
+    "command": "python -m pytest tests/test_d1_simulator.py -v",
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "notes": "DGP, evaluator, engine, isolation, strategy-invariance tests"
+  },
+  "acceptance": {
+    "R5-01": "PASS",
+    "R5-02": "PASS",
+    "R5-03": "PASS",
+    "R5-04": "PASS",
+    "R5-05": "PASS",
+    "R5-06": "PASS"
+  },
+  "acceptance_detail": {
+    "R5-01": "Mathematical spec committed separately (863391e) before implementation.",
+    "R5-02": "DGP with 2 mechanisms (M1 unconfounded, M2 partially confounded). Identifiability check.",
+    "R5-03": "Trusted evaluator separate function. Strategy-identity invariance verified. No hidden truth in public view.",
+    "R5-04": "Raw FDP/Power/Cost correct. All-null, missing answer, false discovery cases tested.",
+    "R5-05": "4 DEV tasks x 2 policies. Non-degenerate score variation (FDP 0.27-0.70).",
+    "R5-06": "15/15 tests pass. Reproducible traces. $0 API cost. No Phase1."
+  },
+  "decision": "CONDITIONAL_GO",
+  "decision_rationale": "D1 measurement validity demonstrated. Non-degenerate scores, correct FDR accounting, strategy-identity invariance. CONDITIONAL on independent DGP review and process isolation upgrade before multi-domain expansion.",
+  "blockers": [],
+  "artifacts": [
+    "research/round_005_d1_mechanism_spec.md",
+    "src/scitransfer/simulator/dgp/bio_expression.py",
+    "src/scitransfer/simulator/engine.py",
+    "src/scitransfer/simulator/evaluator.py",
+    "results/round_005_d1_dev.json",
+    "results/round_005_measurement_audit.md",
+    "tests/test_d1_simulator.py"
+  ],
+  "limitations": [
+    "Synthetic DGP (not validated biological mechanism)",
+    "Independent genes (no co-expression)",
+    "Function-level isolation (not OS process isolation)",
+    "4 DEV tasks only (not statistically powered)",
+    "Simple reference policies (not learned strategies)"
+  ]
+}
