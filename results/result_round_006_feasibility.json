@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "round": 6,
+  "state": "AWAITING_PLANNER_REVIEW",
+  "summary": "Phase 0-E real-data feasibility DESIGN COMPLETE. ESOL (1128 molecules, measured solubility) and NOAA GHCN (real weather) verified as viable with independent RMSE scorers. Bio blocked (no true DE truth). Novelty is narrow (CV overlap). CONDITIONAL GO for micro-smoke only. Zero implementation, zero API, zero training.",
+  "source_commit": null,
+  "environment": {
+    "benchmark": "Proposed real-data protocol (ESOL + NOAA GHCN)",
+    "upstream_ref": "design-only",
+    "official_evaluator_verified": false,
+    "note": "Design only. No data downloaded, no code executed."
+  },
+  "runs": [],
+  "tests": {
+    "command": "N/A (design only)",
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "acceptance": {
+    "AC-01": "PASS",
+    "AC-02": "PASS",
+    "AC-03": "PASS",
+    "AC-04": "PASS",
+    "AC-05": "PASS",
+    "AC-06": "PASS"
+  },
+  "e_gates": {
+    "E1": "CONDITIONAL",
+    "E2": "CONDITIONAL",
+    "E3": "PARTIAL",
+    "E4": "CONDITIONAL",
+    "E5": "PARTIAL",
+    "E6": "CONDITIONAL"
+  },
+  "decision": "CONDITIONAL_GO_MICRO_SMOKE_ONLY",
+  "decision_rationale": "Real measured labels and independent RMSE scorers confirmed. Novelty narrow (CV overlap). CONDITIONAL on license verification and demonstration that strategy adds value beyond standard grouped CV.",
+  "blockers": [
+    {
+      "issue": "Bio domain (airway/pasilla) lacks true DE gene ground truth",
+      "evidence": "DESeq2 output is statistical estimate, not objective truth",
+      "next_action": "BLOCKED for outcome-grounded gate. Use only if independent gold standard found."
+    }
+  ],
+  "artifacts": [
+    "research/round_006_data_source_audit.md",
+    "research/round_006_workflow_contract.md",
+    "research/round_006_experiment_identification.md",
+    "research/round_006_novelty_and_risk.md",
+    "research/round_006_feasibility_decision.md"
+  ],
+  "limitations": [
+    "No data downloaded or verified at runtime",
+    "Novelty is narrow (standard CV overlap)",
+    "Only 2 viable domains (Chemistry + Spatial)",
+    "Bio domain blocked",
+    "License terms not fully verified"
+  ]
+}
